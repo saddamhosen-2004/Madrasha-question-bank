@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Jamat } from '@/types'
 import toast from 'react-hot-toast'
+import { Edit, Trash2 } from 'lucide-react'
 
 export default function JamatManagement() {
   const supabase = createClient()
@@ -105,8 +106,12 @@ export default function JamatManagement() {
                     <td className="p-3">{jamat.name}</td>
                     <td className="p-3">{new Date(jamat.created_at).toLocaleDateString('bn-BD')}</td>
                     <td className="p-3 text-right space-x-2">
-                      <button className="btn btn-sm btn-secondary" onClick={() => openModal(jamat)}>এডিট</button>
-                      <button className="btn btn-sm btn-danger" onClick={() => handleDelete(jamat.id)}>মুছুন</button>
+                      <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(jamat)}>
+                        <Edit size={16} />
+                      </button>
+                      <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(jamat.id)}>
+                        <Trash2 size={16} />
+                      </button>
                     </td>
                   </tr>
                 ))}

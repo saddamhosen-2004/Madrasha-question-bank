@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Jamat, Kitab } from '@/types'
 import toast from 'react-hot-toast'
+import { Edit, Trash2 } from 'lucide-react'
 
 export default function KitabManagement() {
   const supabase = createClient()
@@ -136,8 +137,12 @@ export default function KitabManagement() {
                       <td className="p-3">{kitab.jamat?.name}</td>
                       <td className="p-3">{new Date(kitab.created_at).toLocaleDateString('bn-BD')}</td>
                       <td className="p-3 text-right space-x-2">
-                        <button className="btn btn-sm btn-secondary" onClick={() => openModal(kitab)}>এডিট</button>
-                        <button className="btn btn-sm btn-danger" onClick={() => handleDelete(kitab.id)}>মুছুন</button>
+                        <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(kitab)}>
+                          <Edit size={16} />
+                        </button>
+                        <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(kitab.id)}>
+                          <Trash2 size={16} />
+                        </button>
                       </td>
                     </tr>
                   ))}

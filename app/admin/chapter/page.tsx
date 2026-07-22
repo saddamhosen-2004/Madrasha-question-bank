@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Jamat, Kitab, Chapter } from '@/types'
 import toast from 'react-hot-toast'
+import { Edit, Trash2 } from 'lucide-react'
 
 export default function ChapterManagement() {
   const supabase = createClient()
@@ -162,10 +163,14 @@ export default function ChapterManagement() {
                       <td className="p-3">{chapter.sort_order}</td>
                       <td className="p-3">{chapter.name}</td>
                       <td className="p-3">{chapter.kitab?.name}</td>
-                      <td className="p-3 text-right space-x-2">
-                        <button className="btn btn-sm btn-secondary" onClick={() => openModal(chapter)}>এডিট</button>
-                        <button className="btn btn-sm btn-danger" onClick={() => handleDelete(chapter.id)}>মুছুন</button>
-                      </td>
+                       <td className="p-3 text-right space-x-2">
+                         <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(chapter)}>
+                           <Edit size={16} />
+                         </button>
+                         <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(chapter.id)}>
+                           <Trash2 size={16} />
+                         </button>
+                       </td>
                     </tr>
                   ))}
                 </tbody>

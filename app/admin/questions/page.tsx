@@ -290,11 +290,11 @@ export default function QuestionsManagement() {
                       </span>
                     </td>
                     <td className="p-3 text-right space-x-2">
-                      <button className="btn btn-sm btn-secondary inline-flex items-center gap-1" onClick={() => openModal(q)}>
-                        <Edit2 size={14} /> এডিট
+                      <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(q)}>
+                        <Edit2 size={14} />
                       </button>
-                      <button className="btn btn-sm btn-danger inline-flex items-center gap-1" onClick={() => handleDelete(q.id)}>
-                        <Trash2 size={14} /> মুছুন
+                      <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(q.id)}>
+                        <Trash2 size={14} />
                       </button>
                     </td>
                   </tr>
