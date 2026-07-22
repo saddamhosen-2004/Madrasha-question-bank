@@ -3,6 +3,13 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { PenTool, Zap, History, FileText, Calendar, Award } from 'lucide-react'
 
+function getTrialDaysLeft(trialStartDate: string | null): number {
+  if (!trialStartDate) return 0
+  const start = new Date(trialStartDate).getTime()
+  const now = new Date().getTime()
+  return Math.max(0, 7 - Math.floor((now - start) / (1000 * 60 * 60 * 24)))
+}
+
 export default async function DashboardPage() {
   const supabase = await createClient()
   
@@ -24,7 +31,7 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: false })
     .limit(5)
     
-  const trialDaysLeft = institution.trial_start_date ? Math.max(0, 7 - Math.floor((Date.now() - new Date(institution.trial_start_date).getTime()) / (1000 * 60 * 60 * 24))) : 0
+  const trialDaysLeft = getTrialDaysLeft(institution.trial_start_date)
   const { count: totalPapers } = await supabase
     .from('generated_papers')
     .select('*', { count: 'exact', head: true })
