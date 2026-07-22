@@ -3,43 +3,45 @@
 @import "tailwindcss";
 
 :root {
-  /* Primary - Deep Islamic Green */
-  --color-primary: #1a6b3c;
-  --color-primary-dark: #124d2c;
-  --color-primary-light: #2a8a50;
-  --color-primary-50: #f0faf4;
-  --color-primary-100: #d4f0e0;
+  /* Primary - Luxury Deep Emerald Green */
+  --color-primary: #0f5d34;
+  --color-primary-dark: #07351c;
+  --color-primary-light: #16824a;
+  --color-primary-50: #f1f7f4;
+  --color-primary-100: #d6ede0;
 
-  /* Accent - Gold */
-  --color-accent: #c8952a;
-  --color-accent-light: #f0c060;
+  /* Accent - Luxury Metallic Gold */
+  --color-accent: #c5a059;
+  --color-accent-light: #dfba6b;
+  --color-accent-dark: #987a3e;
+  --color-accent-50: #faf7ef;
 
   /* Neutrals */
-  --color-bg: #f8f9fa;
+  --color-bg: #f4f7f5;
   --color-surface: #ffffff;
-  --color-surface-2: #f1f5f1;
-  --color-border: #e2e8e4;
-  --color-text: #1a2e1e;
-  --color-text-muted: #5a7060;
-  --color-text-light: #8fa896;
+  --color-surface-2: #ecf3ee;
+  --color-border: #dbe4de;
+  --color-text: #0e2015;
+  --color-text-muted: #4e6356;
+  --color-text-light: #839b8c;
 
   /* Status */
-  --color-success: #16a34a;
-  --color-warning: #d97706;
-  --color-danger: #dc2626;
-  --color-info: #2563eb;
+  --color-success: #198754;
+  --color-warning: #f59e0b;
+  --color-danger: #ea580c;
+  --color-info: #0284c7;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(26, 107, 60, 0.08);
-  --shadow-md: 0 4px 16px rgba(26, 107, 60, 0.12);
-  --shadow-lg: 0 8px 32px rgba(26, 107, 60, 0.16);
-  --shadow-xl: 0 16px 48px rgba(26, 107, 60, 0.20);
+  /* Shadows - Emerald glowing luxury shadow */
+  --shadow-sm: 0 2px 8px rgba(15, 93, 52, 0.03);
+  --shadow-md: 0 8px 24px rgba(15, 93, 52, 0.06);
+  --shadow-lg: 0 16px 40px rgba(15, 93, 52, 0.10);
+  --shadow-xl: 0 24px 60px rgba(15, 93, 52, 0.15);
 
   /* Border radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
   --radius-full: 9999px;
 }
 
@@ -175,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.12);
+  box-shadow: 0 0 0 3px rgba(15, 93, 52, 0.12);
 }
 .input::placeholder { color: var(--color-text-light); }
 
