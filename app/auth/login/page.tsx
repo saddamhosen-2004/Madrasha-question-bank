@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
+import Image from 'next/image'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -12,6 +13,25 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [siteName, setSiteName] = useState('মাদ্রাসা প্রশ্নব্যাংক')
+  const [siteLogoUrl, setSiteLogoUrl] = useState<string | null>(null)
+
+  // Load site settings (name + logo) on mount
+  useEffect(() => {
+    async function loadSiteSettings() {
+      const supabase = createClient()
+      const { data } = await supabase
+        .from('site_settings')
+        .select('site_name, site_logo_url')
+        .eq('id', 1)
+        .single()
+      if (data) {
+        if (data.site_name) setSiteName(data.site_name)
+        if (data.site_logo_url) setSiteLogoUrl(data.site_logo_url)
+      }
+    }
+    loadSiteSettings()
+  }, [])
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -73,6 +93,8 @@ export default function LoginPage() {
           justify-content: center;
           font-size: 2rem;
           box-shadow: 0 6px 20px rgba(15,158,110,0.35);
+          overflow: hidden;
+          position: relative;
         }
 
         .login-title {
@@ -236,22 +258,6 @@ export default function LoginPage() {
           color: #b5cfc1;
         }
 
-        .login-forgot {
-          text-align: right;
-          margin-top: 6px;
-        }
-
-        .login-forgot a {
-          font-size: 0.8rem;
-          color: #0f9e6e;
-          text-decoration: none;
-          opacity: 0.8;
-        }
-
-        .login-forgot a:hover {
-          opacity: 1;
-        }
-
         @media (max-width: 480px) {
           .login-card {
             padding: 36px 24px 28px;
@@ -264,11 +270,23 @@ export default function LoginPage() {
 
           {/* Logo */}
           <div className="login-logo-wrap">
-            <div className="login-logo-icon">📚</div>
+            <div className="login-logo-icon">
+              {siteLogoUrl ? (
+                <Image
+                  src={siteLogoUrl}
+                  alt={siteName}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  unoptimized
+                />
+              ) : (
+                '📚'
+              )}
+            </div>
           </div>
 
           {/* Title */}
-          <h1 className="login-title">মাদ্রাসা প্রশ্নব্যাংক</h1>
+          <h1 className="login-title">{siteName}</h1>
           <p className="login-subtitle">আপনার প্রতিষ্ঠানের অ্যাকাউন্টে লগইন করুন</p>
 
           <div className="login-divider" />
@@ -356,7 +374,7 @@ export default function LoginPage() {
 
           {/* Footer */}
           <p className="login-footer">
-            © ২০২৬ মাদ্রাসা প্রশ্নব্যাংক। সর্বস্ব সংরক্ষিত।
+            © ২০২৬ {siteName}। সর্বস্ব সংরক্ষিত।
           </p>
         </div>
       </div>

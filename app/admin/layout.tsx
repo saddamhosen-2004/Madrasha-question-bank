@@ -16,7 +16,8 @@ import {
   CreditCard, 
   LogOut,
   Menu,
-  X
+  X,
+  Settings
 } from 'lucide-react'
 
 const navItems = [
@@ -30,6 +31,8 @@ const navItems = [
   { label: '—— ব্যবস্থাপনা ——', section: true },
   { href: '/admin/institutions', label: 'প্রতিষ্ঠানসমূহ', icon: School },
   { href: '/admin/payments', label: 'পেমেন্ট যাচাই', icon: CreditCard },
+  { label: '—— সেটিংস ——', section: true },
+  { href: '/admin/settings', label: 'সাইট সেটিংস', icon: Settings },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
