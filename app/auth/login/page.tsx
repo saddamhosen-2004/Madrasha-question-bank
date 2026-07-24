@@ -255,7 +255,7 @@ export default function LoginPage() {
           text-align: center;
           margin-top: 24px;
           font-size: 0.78rem;
-          color: #b5cfc1;
+          color: #5a7a67;
         }
 
         @media (max-width: 480px) {
