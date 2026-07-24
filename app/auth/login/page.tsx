@@ -258,6 +258,18 @@ export default function LoginPage() {
           color: #5a7a67;
         }
 
+        .login-footer a {
+          color: #0f9e6e;
+          text-decoration: none;
+          font-weight: 600;
+          transition: opacity 0.15s;
+        }
+
+        .login-footer a:hover {
+          opacity: 0.8;
+          text-decoration: underline;
+        }
+
         @media (max-width: 480px) {
           .login-card {
             padding: 36px 24px 28px;
@@ -374,7 +386,7 @@ export default function LoginPage() {
 
           {/* Footer */}
           <p className="login-footer">
-            © ২০২৬ {siteName}। সর্বস্ব সংরক্ষিত।
+            Developed with 💙 by <a href="https://dgtalcommerce.com" target="_blank" rel="noopener noreferrer">dgtalcommerce.com</a>
           </p>
         </div>
       </div>

@@ -111,6 +111,21 @@ export default function AdminLoginPage() {
             {loading ? <><div className="spinner" /> লগইন হচ্ছে...</> : 'অ্যাডমিন লগইন'}
           </button>
         </form>
+
+        <p style={{
+          textAlign: 'center',
+          marginTop: '2px',
+          marginBottom: '24px',
+          fontSize: '0.78rem',
+          color: '#8b9a91',
+          fontFamily: "'Hind Siliguri', 'Noto Sans Bengali', sans-serif"
+        }}>
+          Developed with 💙 by <a href="https://dgtalcommerce.com" target="_blank" rel="noopener noreferrer" style={{
+            color: '#1a6b3c',
+            textDecoration: 'none',
+            fontWeight: 600
+          }}>dgtalcommerce.com</a>
+        </p>
       </div>
     </div>
   )
