@@ -1,11 +1,40 @@
 import type { Metadata } from 'next'
+import { createClient } from '@/lib/supabase/server'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
 
-export const metadata: Metadata = {
-  title: 'মাদ্রাসা প্রশ্নব্যাংক | Madrasha Question Bank',
-  description: 'বাংলাদেশের মাদ্রাসাগুলোর জন্য সহজ ও দ্রুত প্রশ্নপত্র তৈরির অনলাইন সিস্টেম',
-  keywords: 'মাদ্রাসা, প্রশ্নব্যাংক, question bank, madrasha, Bangladesh',
+export async function generateMetadata(): Promise<Metadata> {
+  let title = 'মাদ্রাসা প্রশ্নব্যাংক | Madrasha Question Bank'
+  let faviconUrl = '/favicon.ico'
+
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('site_settings')
+      .select('site_name, site_favicon_url')
+      .eq('id', 1)
+      .single()
+
+    if (data) {
+      if (data.site_name) {
+        title = data.site_name
+      }
+      if (data.site_favicon_url) {
+        faviconUrl = data.site_favicon_url
+      }
+    }
+  } catch (e) {
+    // Ignore error
+  }
+
+  return {
+    title,
+    description: 'বাংলাদেশের মাদ্রাসাগুলোর জন্য সহজ ও দ্রুত প্রশ্নপত্র তৈরির অনলাইন সিস্টেম',
+    keywords: 'মাদ্রাসা, প্রশ্নব্যাংক, question bank, madrasha, Bangladesh',
+    icons: {
+      icon: faviconUrl,
+    },
+  }
 }
 
 export default function RootLayout({

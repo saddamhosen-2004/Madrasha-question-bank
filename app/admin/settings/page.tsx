@@ -8,12 +8,20 @@ import Image from 'next/image'
 
 export default function SiteSettingsPage() {
   const [siteName, setSiteName] = useState('')
+  
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
   const [logoFile, setLogoFile] = useState<File | null>(null)
   const [logoPreview, setLogoPreview] = useState<string | null>(null)
+
+  const [faviconUrl, setFaviconUrl] = useState<string | null>(null)
+  const [faviconFile, setFaviconFile] = useState<File | null>(null)
+  const [faviconPreview, setFaviconPreview] = useState<string | null>(null)
+
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const fileRef = useRef<HTMLInputElement>(null)
+  
+  const logoInputRef = useRef<HTMLInputElement>(null)
+  const faviconInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     loadSettings()
@@ -32,6 +40,8 @@ export default function SiteSettingsPage() {
       setSiteName(data.site_name || '')
       setLogoUrl(data.site_logo_url || null)
       setLogoPreview(data.site_logo_url || null)
+      setFaviconUrl(data.site_favicon_url || null)
+      setFaviconPreview(data.site_favicon_url || null)
     }
     setLoading(false)
   }
@@ -47,11 +57,29 @@ export default function SiteSettingsPage() {
     setLogoPreview(URL.createObjectURL(file))
   }
 
+  function handleFaviconChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 1 * 1024 * 1024) {
+      toast.error('ফেভিকন সাইজ সর্বোচ্চ ১ MB হতে পারবে')
+      return
+    }
+    setFaviconFile(file)
+    setFaviconPreview(URL.createObjectURL(file))
+  }
+
   function removeLogo() {
     setLogoFile(null)
     setLogoPreview(null)
     setLogoUrl(null)
-    if (fileRef.current) fileRef.current.value = ''
+    if (logoInputRef.current) logoInputRef.current.value = ''
+  }
+
+  function removeFavicon() {
+    setFaviconFile(null)
+    setFaviconPreview(null)
+    setFaviconUrl(null)
+    if (faviconInputRef.current) faviconInputRef.current.value = ''
   }
 
   async function handleSave(e: React.FormEvent) {
@@ -64,8 +92,9 @@ export default function SiteSettingsPage() {
     setSaving(true)
     const supabase = createClient()
     let finalLogoUrl = logoUrl
+    let finalFaviconUrl = faviconUrl
 
-    // Upload new logo if selected
+    // 1. Upload new logo if selected
     if (logoFile) {
       const ext = logoFile.name.split('.').pop()
       const filePath = `site-logo.${ext}`
@@ -85,12 +114,33 @@ export default function SiteSettingsPage() {
       finalLogoUrl = urlData.publicUrl + '?t=' + Date.now()
     }
 
-    // Update site_settings row
+    // 2. Upload new favicon if selected
+    if (faviconFile) {
+      const ext = faviconFile.name.split('.').pop()
+      const filePath = `site-favicon.${ext}`
+      const { error: uploadError } = await supabase.storage
+        .from('site-assets')
+        .upload(filePath, faviconFile, { upsert: true })
+
+      if (uploadError) {
+        toast.error('ফেভিকন আপলোড ব্যর্থ: ' + uploadError.message)
+        setSaving(false)
+        return
+      }
+
+      const { data: urlData } = supabase.storage
+        .from('site-assets')
+        .getPublicUrl(filePath)
+      finalFaviconUrl = urlData.publicUrl + '?t=' + Date.now()
+    }
+
+    // 3. Update database row
     const { error } = await supabase
       .from('site_settings')
       .update({
         site_name: siteName.trim(),
         site_logo_url: finalLogoUrl,
+        site_favicon_url: finalFaviconUrl,
         updated_at: new Date().toISOString(),
       })
       .eq('id', 1)
@@ -101,6 +151,11 @@ export default function SiteSettingsPage() {
       toast.success('সাইট সেটিংস সফলভাবে সংরক্ষিত হয়েছে!')
       setLogoUrl(finalLogoUrl)
       setLogoFile(null)
+      setFaviconUrl(finalFaviconUrl)
+      setFaviconFile(null)
+      
+      // Force reload layout or browser title/icons if needed, or simple refresh
+      router.refresh()
     }
     setSaving(false)
   }
@@ -131,7 +186,7 @@ export default function SiteSettingsPage() {
           </h1>
         </div>
         <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', margin: 0 }}>
-          সাইটের নাম ও লোগো পরিবর্তন করুন। এটি লগইন পেজে দেখানো হবে।
+          সাইটের নাম, লোগো এবং ফেভিকন (ব্রাউজার আইকন) পরিবর্তন করুন।
         </p>
       </div>
 
@@ -173,7 +228,7 @@ export default function SiteSettingsPage() {
               {/* Controls */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <input
-                  ref={fileRef}
+                  ref={logoInputRef}
                   type="file"
                   accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml"
                   onChange={handleLogoChange}
@@ -182,7 +237,7 @@ export default function SiteSettingsPage() {
                 />
                 <button
                   type="button"
-                  onClick={() => fileRef.current?.click()}
+                  onClick={() => logoInputRef.current?.click()}
                   style={{
                     display: 'flex', alignItems: 'center', gap: '8px',
                     padding: '9px 18px',
@@ -228,6 +283,94 @@ export default function SiteSettingsPage() {
 
           <div style={{ height: '1px', background: 'var(--color-border)', margin: '4px 0 24px' }} />
 
+          {/* Favicon Section */}
+          <div style={{ marginBottom: '28px' }}>
+            <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)', marginBottom: '14px' }}>
+              ফেভিকন (Favicon / ব্রাউজার আইকন)
+            </label>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+              {/* Preview */}
+              <div style={{
+                width: '48px', height: '48px', borderRadius: '10px',
+                background: faviconPreview ? 'transparent' : '#f0fdf4',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '1.2rem',
+                border: '1.5px dashed #1a6b3c',
+                overflow: 'hidden',
+                flexShrink: 0,
+                position: 'relative',
+              }}>
+                {faviconPreview ? (
+                  <Image
+                    src={faviconPreview}
+                    alt="ফেভিকন প্রিভিউ"
+                    fill
+                    style={{ objectFit: 'contain', padding: '4px' }}
+                    unoptimized
+                  />
+                ) : (
+                  '🌐'
+                )}
+              </div>
+
+              {/* Controls */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <input
+                  ref={faviconInputRef}
+                  type="file"
+                  accept="image/x-icon,image/png,image/jpeg,image/webp,image/svg+xml"
+                  onChange={handleFaviconChange}
+                  style={{ display: 'none' }}
+                  id="favicon-upload"
+                />
+                <button
+                  type="button"
+                  onClick={() => faviconInputRef.current?.click()}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    padding: '8px 16px',
+                    background: 'var(--color-primary)',
+                    color: 'white',
+                    border: 'none', borderRadius: '8px',
+                    fontSize: '0.84rem', fontWeight: 600,
+                    cursor: 'pointer',
+                    fontFamily: 'inherit',
+                  }}
+                >
+                  <Upload style={{ width: '14px', height: '14px' }} />
+                  ফেভিকন আপলোড করুন
+                </button>
+
+                {faviconPreview && (
+                  <button
+                    type="button"
+                    onClick={removeFavicon}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '8px',
+                      padding: '8px 16px',
+                      background: '#fee2e2',
+                      color: '#dc2626',
+                      border: 'none', borderRadius: '8px',
+                      fontSize: '0.84rem', fontWeight: 600,
+                      cursor: 'pointer',
+                      fontFamily: 'inherit',
+                    }}
+                  >
+                    <X style={{ width: '14px', height: '14px' }} />
+                    ফেভিকন মুছুন
+                  </button>
+                )}
+
+                <p style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', margin: 0 }}>
+                  সর্বোচ্চ ১ MB • ICO, PNG, SVG
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ height: '1px', background: 'var(--color-border)', margin: '4px 0 24px' }} />
+
           {/* Site Name */}
           <div style={{ marginBottom: '28px' }}>
             <label htmlFor="site-name" style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)', marginBottom: '10px' }}>
@@ -244,7 +387,7 @@ export default function SiteSettingsPage() {
               style={{ fontSize: '1rem' }}
             />
             <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '6px' }}>
-              এই নামটি লগইন পেজের শীর্ষে প্রদর্শিত হবে।
+              এই নামটি লগইন পেজ ও ব্রাউজার ট্যাবের শীর্ষে প্রদর্শিত হবে।
             </p>
           </div>
 
