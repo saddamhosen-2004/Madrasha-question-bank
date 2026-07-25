@@ -40,18 +40,19 @@ export default async function DashboardPage() {
   return (
     <div style={{ animation: 'fadeIn 0.4s ease' }}>
       {/* Welcome Header */}
-      <div className="page-header mb-8" style={{ paddingLeft: 0 }}>
-        <h1 className="page-title" style={{ fontSize: '1.8rem', color: 'var(--color-primary-dark)' }}>
+      <div className="page-header" style={{ paddingLeft: 0, marginBottom: '28px' }}>
+        <h1 className="page-title" style={{ fontSize: '1.8rem', color: 'var(--color-primary-dark)', margin: 0 }}>
           আসসালামু আলাইকুম, {institution.name}
         </h1>
-        <p className="page-subtitle">আপনার মাদ্রাসা প্রশ্নব্যাংক ড্যাশবোর্ড ওভারভিউ</p>
+        <p className="page-subtitle" style={{ margin: '4px 0 0' }}>আপনার মাদ্রাসা প্রশ্নব্যাংক ড্যাশবোর্ড ওভারভিউ</p>
       </div>
 
       {/* Subscription Status Panel */}
-      <div className="card mb-8" style={{ 
+      <div className="card" style={{ 
         background: '#ffffff', 
         borderLeft: '4px solid var(--color-primary)',
-        padding: institution.subscription_status === 'trial' ? '14px 20px' : '24px'
+        padding: institution.subscription_status === 'trial' ? '14px 20px' : '24px',
+        marginBottom: '28px'
       }}>
         {institution.subscription_status === 'trial' && (
           <div style={{ textAlign: 'center', width: '100%' }}>
@@ -64,8 +65,8 @@ export default async function DashboardPage() {
         {institution.subscription_status === 'active' && (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
             <div>
-              <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-success)' }}>✅ সক্রিয় সাবস্ক্রিপশন</h3>
-              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', marginTop: '2px' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-success)', margin: 0 }}>✅ সক্রিয় সাবস্ক্রিপশন</h3>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', margin: '2px 0 0' }}>
                 মেয়াদ শেষ হবে: {institution.subscription_expiry ? new Date(institution.subscription_expiry).toLocaleDateString('bn-BD', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A'}
               </p>
             </div>
@@ -76,8 +77,8 @@ export default async function DashboardPage() {
         {(institution.subscription_status === 'expired' || institution.subscription_status === 'inactive') && (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-danger)' }}>⚠️ মেয়াদোত্তীর্ণ সাবস্ক্রিপশন</h3>
-              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', marginTop: '2px' }}>
+              <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-danger)', margin: 0 }}>⚠️ মেয়াদোত্তীর্ণ সাবস্ক্রিপশন</h3>
+              <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', margin: '2px 0 0' }}>
                 আপনার সাবস্ক্রিপশনের মেয়াদ শেষ হয়ে গেছে। নতুন প্রশ্নপত্র তৈরি করতে অনুগ্রহ করে নবায়ন করুন।
               </p>
             </div>
@@ -89,7 +90,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Main Interactive Actions */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '32px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px', marginBottom: '40px' }}>
         <Link href="/dashboard/create" className="card" style={{ 
           textDecoration: 'none', 
           padding: '32px 24px',
@@ -105,8 +106,8 @@ export default async function DashboardPage() {
           <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem' }}>
             ✍️
           </div>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'white' }}>ম্যানুয়াল প্রশ্নপত্র তৈরি</h3>
-          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.5' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'white', margin: 0 }}>ম্যানুয়াল প্রশ্নপত্র তৈরি</h3>
+          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.5', margin: 0 }}>
             আপনার পছন্দ অনুযায়ী কিতাব ও অধ্যায়ভিত্তিক প্রশ্ন ম্যানুয়ালি বেছে নিয়ে প্রশ্নপত্র সাজান ও PDF ডাউনলোড করুন।
           </p>
         </Link>
@@ -126,15 +127,15 @@ export default async function DashboardPage() {
           <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem' }}>
             ⚡
           </div>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'white' }}>Auto Generate প্রশ্নপত্র</h3>
-          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.5' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'white', margin: 0 }}>Auto Generate প্রশ্নপত্র</h3>
+          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)', lineHeight: '1.5', margin: 0 }}>
             কিতাব ও অধ্যায়ের পাশে কতটি প্রশ্ন চান তা লিখে দিন, সিস্টেম স্বয়ংক্রিয়ভাবে সেকেন্ডের মধ্যে প্রশ্ন রেডি করবে।
           </p>
         </Link>
       </div>
 
       {/* Recent Generated Papers Table */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
         <Calendar style={{ width: '20px', height: '20px', color: 'var(--color-primary)' }} />
         <h2 className="text-xl font-bold text-[var(--color-text)]" style={{ margin: 0 }}>সাম্প্রতিক প্রশ্নপত্রসমূহ</h2>
       </div>
