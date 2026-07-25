@@ -16,6 +16,11 @@ export default function LoginPage() {
   const [siteName, setSiteName] = useState('মাদ্রাসা প্রশ্নব্যাংক')
   const [siteLogoUrl, setSiteLogoUrl] = useState<string | null>(null)
 
+  // Forgot password states
+  const [showForgotModal, setShowForgotModal] = useState(false)
+  const [forgotEmail, setForgotEmail] = useState('')
+  const [forgotLoading, setForgotLoading] = useState(false)
+
   // Load site settings (name + logo) on mount
   useEffect(() => {
     async function loadSiteSettings() {
@@ -32,6 +37,24 @@ export default function LoginPage() {
     }
     loadSiteSettings()
   }, [])
+
+  async function handleForgotSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!forgotEmail) return
+    setForgotLoading(true)
+    const supabase = createClient()
+    const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+      redirectTo: `${window.location.origin}/auth/reset-password`,
+    })
+    setForgotLoading(false)
+    if (error) {
+      toast.error('রিসেট লিংক পাঠানো যায়নি: ' + error.message)
+    } else {
+      toast.success('রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!')
+      setShowForgotModal(false)
+      setForgotEmail('')
+    }
+  }
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
@@ -330,7 +353,25 @@ export default function LoginPage() {
 
             {/* Password */}
             <div className="login-field">
-              <label className="login-label" htmlFor="login-password">পাসওয়ার্ড</label>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <label className="login-label" htmlFor="login-password" style={{ margin: 0 }}>পাসওয়ার্ড</label>
+                <button
+                  type="button"
+                  onClick={() => setShowForgotModal(true)}
+                  style={{ 
+                    fontSize: '0.82rem', 
+                    color: '#0f9e6e', 
+                    background: 'none', 
+                    border: 'none', 
+                    padding: 0, 
+                    cursor: 'pointer', 
+                    fontWeight: 600,
+                    textDecoration: 'underline'
+                  }}
+                >
+                  পাসওয়ার্ড ভুলে গেছেন?
+                </button>
+              </div>
               <div className="login-input-wrap">
                 <span className="login-input-icon">
                   <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -390,6 +431,50 @@ export default function LoginPage() {
           </p>
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgotModal && (
+        <div className="modal-overlay" style={{ zIndex: 1000 }}>
+          <div className="modal" style={{ maxWidth: '400px', width: '100%', padding: '28px', borderRadius: '16px' }}>
+            <h2 className="text-xl font-bold mb-2" style={{ margin: '0 0 8px', color: 'var(--color-text)' }}>পাসওয়ার্ড রিসেট</h2>
+            <p className="text-sm text-[var(--color-text-muted)]" style={{ margin: '0 0 24px', lineHeight: '1.5' }}>
+              আপনার অ্যাকাউন্টের ইমেইল ঠিকানাটি লিখুন। আমরা আপনাকে পাসওয়ার্ড রিসেট করার একটি লিংক পাঠাবো।
+            </p>
+            <form onSubmit={handleForgotSubmit}>
+              <div className="form-group" style={{ marginBottom: '20px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ইমেইল ঠিকানা</label>
+                <input
+                  type="email"
+                  className="input"
+                  placeholder="example@gmail.com"
+                  value={forgotEmail}
+                  onChange={e => setForgotEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '24px' }}>
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  style={{ padding: '8px 18px' }}
+                  onClick={() => setShowForgotModal(false)}
+                  disabled={forgotLoading}
+                >
+                  বাতিল
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ padding: '8px 24px' }}
+                  disabled={forgotLoading}
+                >
+                  {forgotLoading ? <span className="spinner" /> : 'লিংক পাঠান'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   )
 }
