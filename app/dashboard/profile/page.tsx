@@ -44,6 +44,7 @@ export default function ProfilePage() {
     const { error } = await supabase
       .from('institutions')
       .update({
+        name: formData.name,
         phone: formData.phone,
         address: formData.address
       })
@@ -53,6 +54,8 @@ export default function ProfilePage() {
       toast.error('প্রোফাইল আপডেট করতে সমস্যা হয়েছে')
     } else {
       toast.success('প্রোফাইল সফলভাবে আপডেট হয়েছে')
+      // Update local storage/state name if needed
+      setInstitution({ ...institution, name: formData.name })
     }
     setSaving(false)
   }
@@ -142,12 +145,12 @@ export default function ProfilePage() {
             <form onSubmit={handleSave} className="space-y-4">
               <div className="form-group" style={{ marginBottom: '18px' }}>
                 <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
-                <input type="text" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={formData.name} disabled />
-                <p className="text-xs text-[var(--color-text-muted)] mt-1" style={{ margin: '4px 0 0' }}>নাম পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
+                <input type="text" className="input" placeholder="প্রতিষ্ঠানের নাম লিখুন" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
               </div>
               <div className="form-group" style={{ marginBottom: '18px' }}>
                 <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ইমেইল</label>
                 <input type="email" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={institution?.email || ''} disabled />
+                <p className="text-xs text-[var(--color-text-muted)] mt-1" style={{ margin: '4px 0 0' }}>লগইন ইমেইল পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
               </div>
               <div className="form-group" style={{ marginBottom: '18px' }}>
                 <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোবাইল নম্বর</label>
