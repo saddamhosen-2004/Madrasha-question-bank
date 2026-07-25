@@ -68,95 +68,104 @@ export default function SubscriptionPage() {
   if (loading) return <div className="flex justify-center p-8"><div className="spinner spinner-dark" /></div>
 
   return (
-    <div style={{ maxWidth: '640px', margin: '0 auto', width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <div className="page-header mb-8" style={{ paddingLeft: 0, paddingRight: 0 }}>
         <h1 className="page-title">সাবস্ক্রিপশন</h1>
         <p className="page-subtitle">আপনার সাবস্ক্রিপশন স্ট্যাটাস এবং পেমেন্ট</p>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-        {/* 1. Payment Form (First) */}
-        <div className="card" style={{ padding: '24px' }}>
-          <h2 className="text-xl font-bold mb-4" style={{ margin: '0 0 20px' }}>পেমেন্ট জমা দিন</h2>
-          <form onSubmit={handleSubmitPayment}>
-            <div className="form-group" style={{ marginBottom: '18px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>পেমেন্ট মেথড</label>
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <label style={{ 
-                  flex: '1', minWidth: '90px', border: '1.5px solid', borderRadius: '10px', padding: '10px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
-                  borderColor: method === 'bkash' ? '#e2136e' : '#d5e5da',
-                  background: method === 'bkash' ? '#e2136e/10' : '#f8fbf9'
-                }}>
-                  <input type="radio" name="method" value="bkash" className="hidden" checked={method === 'bkash'} onChange={() => setMethod('bkash')} />
-                  <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#e2136e' }}>bKash 🦅</span>
-                </label>
-                <label style={{ 
-                  flex: '1', minWidth: '90px', border: '1.5px solid', borderRadius: '10px', padding: '10px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
-                  borderColor: method === 'nagad' ? '#ed1c24' : '#d5e5da',
-                  background: method === 'nagad' ? '#ed1c24/10' : '#f8fbf9'
-                }}>
-                  <input type="radio" name="method" value="nagad" className="hidden" checked={method === 'nagad'} onChange={() => setMethod('nagad')} />
-                  <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#ed1c24' }}>Nagad 💸</span>
-                </label>
-                <label style={{ 
-                  flex: '1', minWidth: '90px', border: '1.5px solid', borderRadius: '10px', padding: '10px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
-                  borderColor: method === 'rocket' ? '#8c1562' : '#d5e5da',
-                  background: method === 'rocket' ? '#8c1562/10' : '#f8fbf9'
-                }}>
-                  <input type="radio" name="method" value="rocket" className="hidden" checked={method === 'rocket'} onChange={() => setMethod('rocket')} />
-                  <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#8c1562' }}>Rocket 🚀</span>
-                </label>
+        {/* Top Section: Payment Form & Status Card side-by-side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ display: 'grid', gap: '28px' }}>
+          
+          {/* 1. Payment Form Card */}
+          <div className="card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <h2 className="text-xl font-bold mb-4" style={{ margin: '0 0 20px' }}>পেমেন্ট জমা দিন</h2>
+            <form onSubmit={handleSubmitPayment} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <div className="form-group" style={{ marginBottom: '18px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>পেমেন্ট মেথড</label>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                  <label style={{ 
+                    flex: '1', minWidth: '90px', border: '1.5px solid', borderRadius: '10px', padding: '10px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
+                    borderColor: method === 'bkash' ? '#e2136e' : '#d5e5da',
+                    background: method === 'bkash' ? '#e2136e/10' : '#f8fbf9'
+                  }}>
+                    <input type="radio" name="method" value="bkash" className="hidden" checked={method === 'bkash'} onChange={() => setMethod('bkash')} />
+                    <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#e2136e' }}>bKash 🦅</span>
+                  </label>
+                  <label style={{ 
+                    flex: '1', minWidth: '90px', border: '1.5px solid', borderRadius: '10px', padding: '10px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
+                    borderColor: method === 'nagad' ? '#ed1c24' : '#d5e5da',
+                    background: method === 'nagad' ? '#ed1c24/10' : '#f8fbf9'
+                  }}>
+                    <input type="radio" name="method" value="nagad" className="hidden" checked={method === 'nagad'} onChange={() => setMethod('nagad')} />
+                    <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#ed1c24' }}>Nagad 💸</span>
+                  </label>
+                  <label style={{ 
+                    flex: '1', minWidth: '90px', border: '1.5px solid', borderRadius: '10px', padding: '10px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
+                    borderColor: method === 'rocket' ? '#8c1562' : '#d5e5da',
+                    background: method === 'rocket' ? '#8c1562/10' : '#f8fbf9'
+                  }}>
+                    <input type="radio" name="method" value="rocket" className="hidden" checked={method === 'rocket'} onChange={() => setMethod('rocket')} />
+                    <span style={{ fontWeight: 700, fontSize: '0.85rem', color: '#8c1562' }}>Rocket 🚀</span>
+                  </label>
+                </div>
+              </div>
+              <div className="form-group" style={{ marginBottom: '18px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>অ্যামাউন্ট</label>
+                <input type="text" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value="৳১,০০০" disabled />
+              </div>
+              <div className="form-group" style={{ marginBottom: '22px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>Transaction ID (TrxID)</label>
+                <input type="text" className="input" placeholder="উদা: 8HDF38DK2M" value={trxId} onChange={e => setTrxId(e.target.value)} required />
+              </div>
+              <button type="submit" disabled={submitting} className="btn btn-primary w-full" style={{ width: '100%', padding: '12px', justifyContent: 'center', fontWeight: 700, fontSize: '0.95rem', marginTop: 'auto' }} id="submit-payment-btn">
+                {submitting ? <span className="spinner" /> : 'পেমেন্ট জমা দিন'}
+              </button>
+            </form>
+          </div>
+
+          {/* 2. Status Card */}
+          <div className="card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <h2 className="text-xl font-bold mb-4" style={{ margin: '0 0 16px' }}>বর্তমান স্ট্যাটাস</h2>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '16px' }}>
+              <div>
+                {institution?.subscription_status === 'trial' && (
+                  <div className="alert alert-info" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#e0f2fe', color: '#0369a1', borderRadius: '8px', border: '1px solid #bae6fd' }}>
+                    <h3 className="font-bold" style={{ margin: '0 0 4px', fontSize: '0.95rem' }}>🎁 ট্রায়াল চলছে</h3>
+                    <p style={{ margin: 0, fontSize: '0.85rem', lineHeight: '1.5' }}>আপনার ৭ দিনের ফ্রি ট্রায়াল চলছে। ট্রায়াল শেষে সিস্টেম ব্যবহার চালিয়ে যেতে সাবস্ক্রিপশন ফি প্রদান করুন।</p>
+                  </div>
+                )}
+                {institution?.subscription_status === 'active' && (
+                  <div className="alert alert-success" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#dcfce7', color: '#15803d', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
+                    <h3 className="font-bold" style={{ margin: '0 0 4px', fontSize: '0.95rem' }}>✅ সক্রিয় সাবস্ক্রিপশন</h3>
+                    <p style={{ margin: 0, fontSize: '0.85rem', lineHeight: '1.5' }}>মেয়াদ শেষ হবে: {institution?.subscription_expires_at ? new Date(institution.subscription_expires_at).toLocaleDateString('bn-BD') : 'N/A'}</p>
+                  </div>
+                )}
+                {(institution?.subscription_status === 'expired' || institution?.subscription_status === 'inactive' || institution?.subscription_status === 'blocked') && (
+                  <div className="alert alert-danger" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', border: '1px solid #fecaca' }}>
+                    <h3 className="font-bold" style={{ margin: '0 0 4px', fontSize: '0.95rem' }}>⚠️ মেয়াদোত্তীর্ণ</h3>
+                    <p style={{ margin: 0, fontSize: '0.85rem', lineHeight: '1.5' }}>দয়া করে সাবস্ক্রিপশন ফি প্রদান করে অ্যাকাউন্ট সক্রিয় করুন।</p>
+                  </div>
+                )}
+              </div>
+              
+              <div style={{ background: '#f0f9f4', padding: '18px', borderRadius: '12px', border: '1.5px solid #c8e6d0' }}>
+                <h3 style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '1rem', margin: '0 0 8px' }}>বার্ষিক সাবস্ক্রিপশন ফি: ৳১,০০০</h3>
+                <p style={{ color: 'var(--color-text)', fontSize: '0.86rem', fontWeight: 600, margin: '0 0 8px' }}>পেমেন্ট করার নিয়ম:</p>
+                <ul style={{ listStyleType: 'disc', paddingLeft: '20px', fontSize: '0.82rem', color: '#4f6b5a', margin: 0 }}>
+                  <li style={{ marginBottom: '4px' }}>নিচের যেকোনো নম্বরে Send Money করুন</li>
+                  <li style={{ marginBottom: '4px' }}>বিকাশ/নগদ/রকেট নম্বর: <strong style={{ color: 'var(--color-primary-dark)' }}>01700-000000</strong> (Personal)</li>
+                  <li style={{ marginBottom: '4px' }}>পেমেন্ট করার পর Transaction ID নিচের ফর্মে দিন</li>
+                  <li>অ্যাডমিন আপনার পেমেন্ট যাচাই করে অ্যাকাউন্ট সক্রিয় করে দেবেন</li>
+                </ul>
               </div>
             </div>
-            <div className="form-group" style={{ marginBottom: '18px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>অ্যামাউন্ট</label>
-              <input type="text" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value="৳৮,০০০" disabled />
-            </div>
-            <div className="form-group" style={{ marginBottom: '22px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>Transaction ID (TrxID)</label>
-              <input type="text" className="input" placeholder="উদা: 8HDF38DK2M" value={trxId} onChange={e => setTrxId(e.target.value)} required />
-            </div>
-            <button type="submit" disabled={submitting} className="btn btn-primary w-full" style={{ width: '100%', padding: '12px', justifyContent: 'center', fontWeight: 700, fontSize: '0.95rem' }} id="submit-payment-btn">
-              {submitting ? <span className="spinner" /> : 'পেমেন্ট জমা দিন'}
-            </button>
-          </form>
-        </div>
-
-        {/* 2. Status (Second) */}
-        <div className="card" style={{ padding: '24px' }}>
-          <h2 className="text-xl font-bold mb-4" style={{ margin: '0 0 16px' }}>বর্তমান স্ট্যাটাস</h2>
-          {institution?.subscription_status === 'trial' && (
-            <div className="alert alert-info" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#e0f2fe', color: '#0369a1', borderRadius: '8px', border: '1px solid #bae6fd' }}>
-              <h3 className="font-bold" style={{ margin: '0 0 4px', fontSize: '0.95rem' }}>🎁 ট্রায়াল চলছে</h3>
-              <p style={{ margin: 0, fontSize: '0.85rem', lineHeight: '1.5' }}>আপনার ৭ দিনের ফ্রি ট্রায়াল চলছে। ট্রায়াল শেষে সিস্টেম ব্যবহার চালিয়ে যেতে সাবস্ক্রিপশন ফি প্রদান করুন।</p>
-            </div>
-          )}
-          {institution?.subscription_status === 'active' && (
-            <div className="alert alert-success" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#dcfce7', color: '#15803d', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
-              <h3 className="font-bold" style={{ margin: '0 0 4px', fontSize: '0.95rem' }}>✅ সক্রিয় সাবস্ক্রিপশন</h3>
-              <p style={{ margin: 0, fontSize: '0.85rem', lineHeight: '1.5' }}>মেয়اد শেষ হবে: {institution?.subscription_expires_at ? new Date(institution.subscription_expires_at).toLocaleDateString('bn-BD') : 'N/A'}</p>
-            </div>
-          )}
-          {(institution?.subscription_status === 'expired' || institution?.subscription_status === 'inactive' || institution?.subscription_status === 'blocked') && (
-            <div className="alert alert-danger" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', border: '1px solid #fecaca' }}>
-              <h3 className="font-bold" style={{ margin: '0 0 4px', fontSize: '0.95rem' }}>⚠️ মেয়াদোত্তীর্ণ</h3>
-              <p style={{ margin: 0, fontSize: '0.85rem', lineHeight: '1.5' }}>দয়া করে সাবস্ক্রিপশন ফি প্রদান করে অ্যাকাউন্ট সক্রিয় করুন।</p>
-            </div>
-          )}
-          
-          <div style={{ background: '#f0f9f4', padding: '18px', borderRadius: '12px', border: '1.5px solid #c8e6d0' }}>
-            <h3 style={{ fontWeight: 700, color: 'var(--color-primary)', fontSize: '1rem', margin: '0 0 8px' }}>বার্ষিক সাবস্ক্রিপশন ফি: ৳৮,০০০</h3>
-            <p style={{ color: 'var(--color-text)', fontSize: '0.86rem', fontWeight: 600, margin: '0 0 8px' }}>পেমেন্ট করার নিয়ম:</p>
-            <ul style={{ listStyleType: 'disc', paddingLeft: '20px', fontSize: '0.82rem', color: '#4f6b5a', margin: 0 }}>
-              <li style={{ marginBottom: '4px' }}>নিচের যেকোনো নম্বরে Send Money করুন</li>
-              <li style={{ marginBottom: '4px' }}>বিকাশ/নগদ/রকেট নম্বর: <strong style={{ color: 'var(--color-primary-dark)' }}>01700-000000</strong> (Personal)</li>
-              <li style={{ marginBottom: '4px' }}>পেমেন্ট করার পর Transaction ID নিচের ফর্মে দিন</li>
-              <li>অ্যাডমিন আপনার পেমেন্ট যাচাই করে অ্যাকাউন্ট সক্রিয় করে দেবেন</li>
-            </ul>
           </div>
+
         </div>
 
-        {/* 3. History (Third - Shorter) */}
+        {/* 3. History (Bottom - Shorter) */}
         <div className="card flex flex-col" style={{ maxHeight: '280px' }}>
           <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)' }}>
             <h2 className="text-lg font-bold" style={{ margin: 0 }}>পেমেন্ট হিস্ট্রি</h2>
