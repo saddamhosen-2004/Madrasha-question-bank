@@ -177,16 +177,16 @@ export default function ManualCreatePage() {
         <p className="page-subtitle">আপনার পছন্দমতো প্রশ্ন নির্বাচন করে প্রশ্নপত্র তৈরি করুন</p>
       </div>
 
-      <div className="card p-6 mb-8 flex gap-4">
-        <div className="form-group flex-1">
-          <label className="label">জামাত নির্বাচন করুন</label>
+      <div className="card mb-8 flex flex-col md:flex-row gap-4" style={{ padding: '24px' }}>
+        <div className="form-group flex-1" style={{ marginBottom: 0 }}>
+          <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px' }}>জামাত নির্বাচন করুন</label>
           <select className="input" value={selectedJamat} onChange={e => setSelectedJamat(e.target.value)}>
             <option value="">-- নির্বাচন করুন --</option>
             {jamats.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
           </select>
         </div>
-        <div className="form-group flex-1">
-          <label className="label">কিতাব নির্বাচন করুন</label>
+        <div className="form-group flex-1" style={{ marginBottom: 0 }}>
+          <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px' }}>কিতাব নির্বাচন করুন</label>
           <select className="input" value={selectedKitab} onChange={e => setSelectedKitab(e.target.value)} disabled={!selectedJamat}>
             <option value="">-- নির্বাচন করুন --</option>
             {kitabs.map(k => <option key={k.id} value={k.id}>{k.name}</option>)}
