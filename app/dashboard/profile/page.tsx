@@ -22,7 +22,7 @@ export default function ProfilePage() {
     async function loadData() {
       const { data: { user } } = await supabase.auth.getUser()
       if (user) {
-        const { data: inst } = await supabase.from('institutions').select('*').eq('id', user.id).single()
+        const { data: inst } = await supabase.from('institutions').select('*').eq('auth_user_id', user.id).single()
         setInstitution(inst)
         if (inst) {
           setFormData({
