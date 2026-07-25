@@ -107,14 +107,14 @@ export default function ProfilePage() {
         <p className="page-subtitle">আপনার প্রতিষ্ঠানের তথ্য আপডেট করুন</p>
       </div>
 
-      <div className="card p-8">
-        <div className="flex flex-col md:flex-row gap-8 items-start">
+      <div className="card" style={{ padding: '32px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', mdDirection: 'row', gap: '32px' }} className="flex flex-col md:flex-row items-start">
           
           {/* Logo Section */}
-          <div className="w-full md:w-1/3 flex flex-col items-center">
+          <div className="w-full md:w-1/3 flex flex-col items-center" style={{ flexShrink: 0 }}>
             <div className="relative w-40 h-40 rounded-full border-4 border-[var(--color-primary-50)] overflow-hidden bg-[var(--color-surface)] flex items-center justify-center mb-4 shadow-lg group">
               {institution?.logo_url ? (
-                <Image src={institution.logo_url} alt="Logo" fill className="object-cover" />
+                <Image src={institution.logo_url} alt="Logo" fill className="object-cover" unoptimized />
               ) : (
                 <span className="text-4xl text-[var(--color-primary)] font-bold">{institution?.name?.charAt(0) || 'I'}</span>
               )}
@@ -132,34 +132,34 @@ export default function ProfilePage() {
               </label>
             </div>
             <div className="text-center">
-              <h3 className="font-bold text-lg text-[var(--color-text)]">{institution?.name}</h3>
-              <p className="text-sm text-[var(--color-text-muted)]">{institution?.email}</p>
+              <h3 className="font-bold text-lg text-[var(--color-text)]" style={{ margin: '0 0 4px' }}>{institution?.name}</h3>
+              <p className="text-sm text-[var(--color-text-muted)]" style={{ margin: 0 }}>{institution?.email}</p>
             </div>
           </div>
 
           {/* Form Section */}
           <div className="w-full md:w-2/3">
             <form onSubmit={handleSave} className="space-y-4">
-              <div className="form-group">
-                <label className="label">প্রতিষ্ঠানের নাম</label>
-                <input type="text" className="input bg-[var(--color-bg)] cursor-not-allowed" value={formData.name} disabled />
-                <p className="text-xs text-[var(--color-text-muted)] mt-1">নাম পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
+              <div className="form-group" style={{ marginBottom: '18px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
+                <input type="text" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={formData.name} disabled />
+                <p className="text-xs text-[var(--color-text-muted)] mt-1" style={{ margin: '4px 0 0' }}>নাম পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
               </div>
-              <div className="form-group">
-                <label className="label">ইমেইল</label>
-                <input type="email" className="input bg-[var(--color-bg)] cursor-not-allowed" value={institution?.email || ''} disabled />
+              <div className="form-group" style={{ marginBottom: '18px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ইমেইল</label>
+                <input type="email" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={institution?.email || ''} disabled />
               </div>
-              <div className="form-group">
-                <label className="label">মোবাইল নম্বর</label>
+              <div className="form-group" style={{ marginBottom: '18px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোবাইল নম্বর</label>
                 <input type="text" className="input" placeholder="উদা: 017XXXXXXX" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} required />
               </div>
-              <div className="form-group">
-                <label className="label">ঠিকানা</label>
+              <div className="form-group" style={{ marginBottom: '22px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ঠিকানা</label>
                 <textarea className="input min-h-[100px]" placeholder="প্রতিষ্ঠানের সম্পূর্ণ ঠিকানা লিখুন" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} required />
               </div>
               
-              <div className="pt-4 border-t border-[var(--color-border)] flex justify-end">
-                <button type="submit" disabled={saving} className="btn btn-primary px-8">
+              <div className="pt-4 border-t border-[var(--color-border)] flex justify-end" style={{ paddingTop: '16px', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end' }}>
+                <button type="submit" disabled={saving} className="btn btn-primary px-8" style={{ padding: '10px 28px', fontSize: '0.92rem' }} id="profile-save-btn">
                   {saving ? <span className="spinner" /> : 'সেভ করুন'}
                 </button>
               </div>
