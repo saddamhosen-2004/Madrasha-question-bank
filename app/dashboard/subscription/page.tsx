@@ -139,7 +139,7 @@ export default function SubscriptionPage() {
           {/* 2. Status Card */}
           <div className="card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '100%' }}>
             <h2 className="text-xl font-bold mb-4" style={{ margin: '0 0 16px' }}>বর্তমান স্ট্যাটাস</h2>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '16px' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: '20px' }}>
               <div>
                 {institution?.subscription_status === 'trial' && (
                   <div className="alert alert-info" style={{ margin: '0 0 16px', padding: '14px 18px', background: '#e0f2fe', color: '#0369a1', borderRadius: '8px', border: '1px solid #bae6fd' }}>
