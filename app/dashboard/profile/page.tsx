@@ -101,17 +101,17 @@ export default function ProfilePage() {
   if (loading) return <div className="flex justify-center p-8"><div className="spinner spinner-dark" /></div>
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="page-header mb-8">
+    <div style={{ maxWidth: '640px', margin: '0 auto', width: '100%' }}>
+      <div className="page-header mb-8" style={{ paddingLeft: 0, paddingRight: 0 }}>
         <h1 className="page-title">প্রতিষ্ঠান প্রোফাইল</h1>
         <p className="page-subtitle">আপনার প্রতিষ্ঠানের তথ্য আপডেট করুন</p>
       </div>
 
-      <div className="card" style={{ padding: '32px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', mdDirection: 'row', gap: '32px' }} className="flex flex-col md:flex-row items-start">
+      <div className="card" style={{ padding: '28px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', alignItems: 'center' }}>
           
           {/* Logo Section */}
-          <div className="w-full md:w-1/3 flex flex-col items-center" style={{ flexShrink: 0 }}>
+          <div className="w-full flex flex-col items-center" style={{ flexShrink: 0 }}>
             <div className="relative w-40 h-40 rounded-full border-4 border-[var(--color-primary-50)] overflow-hidden bg-[var(--color-surface)] flex items-center justify-center mb-4 shadow-lg group">
               {institution?.logo_url ? (
                 <Image src={institution.logo_url} alt="Logo" fill className="object-cover" unoptimized />
@@ -138,7 +138,7 @@ export default function ProfilePage() {
           </div>
 
           {/* Form Section */}
-          <div className="w-full md:w-2/3">
+          <div className="w-full">
             <form onSubmit={handleSave} className="space-y-4">
               <div className="form-group" style={{ marginBottom: '18px' }}>
                 <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
