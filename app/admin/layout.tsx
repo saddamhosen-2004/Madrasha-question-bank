@@ -160,7 +160,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Main content */}
         <main className="main-content" style={{ flex: 1 }}>
-          <div style={{ padding: '28px', minHeight: '100vh' }}>
+          <div className="main-content-inner" style={{ minHeight: '100vh' }}>
             {children}
           </div>
         </main>
