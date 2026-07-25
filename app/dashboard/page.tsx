@@ -88,35 +88,6 @@ export default async function DashboardPage() {
         )}
       </div>
 
-      {/* Grid Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="stat-card" style={{ padding: '24px', background: 'white' }}>
-          <div className="stat-icon" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
-            <FileText className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="stat-value">{totalPapers || 0}টি</div>
-            <div className="stat-label">মোট তৈরি প্রশ্নপত্র</div>
-          </div>
-        </div>
-
-        <div className="stat-card" style={{ padding: '24px', background: 'white' }}>
-          <div className="stat-icon" style={{ 
-            background: institution.subscription_status === 'active' ? '#dcfce7' : '#dbeafe', 
-            color: institution.subscription_status === 'active' ? 'var(--color-success)' : 'var(--color-info)' 
-          }}>
-            <Award className="w-6 h-6" />
-          </div>
-          <div>
-            <div className="stat-value" style={{ textTransform: 'capitalize' }}>
-              {institution.subscription_status === 'trial' ? 'ট্রায়াল' : 
-               institution.subscription_status === 'active' ? 'সক্রিয়' : 'বন্ধ'}
-            </div>
-            <div className="stat-label">প্যাকেজ স্ট্যাটাস</div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Interactive Actions */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <Link href="/dashboard/create" className="card" style={{ 
