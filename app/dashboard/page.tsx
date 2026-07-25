@@ -48,23 +48,16 @@ export default async function DashboardPage() {
       </div>
 
       {/* Subscription Status Panel */}
-      <div className="card mb-8 p-6" style={{ background: '#ffffff', borderLeft: '4px solid var(--color-primary)' }}>
+      <div className="card mb-8" style={{ 
+        background: '#ffffff', 
+        borderLeft: '4px solid var(--color-primary)',
+        padding: institution.subscription_status === 'trial' ? '14px 20px' : '24px'
+      }}>
         {institution.subscription_status === 'trial' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-              <div style={{ flex: '1', minWidth: '240px' }}>
-                <h3 style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-text)', margin: 0 }}>🎁 ৭ দিনের ফ্রি ট্রায়াল</h3>
-                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', marginTop: '4px', marginBottom: 0 }}>
-                  আপনার ট্রায়াল শেষ হতে আরও <strong>{trialDaysLeft} দিন</strong> বাকি আছে।
-                </p>
-              </div>
-              <span className="badge badge-info" style={{ padding: '6px 12px', fontSize: '0.8rem' }}>ফ্রি ট্রায়াল</span>
-            </div>
-            
-            {/* Progress Bar */}
-            <div style={{ width: '100%', height: '8px', background: '#e2e8e4', borderRadius: '4px', overflow: 'hidden', marginTop: '6px' }}>
-              <div style={{ width: `${(trialDaysLeft / 7) * 100}%`, height: '100%', background: 'linear-gradient(90deg, var(--color-primary), var(--color-primary-light))', borderRadius: '4px' }} />
-            </div>
+          <div style={{ textAlign: 'center', width: '100%' }}>
+            <span style={{ color: 'var(--color-text)', fontSize: '0.95rem', fontWeight: 600 }}>
+              🎁 আপনার ফ্রি ট্রায়াল শেষ হতে আরও <strong style={{ color: 'var(--color-primary)' }}>{trialDaysLeft} দিন</strong> বাকি আছে।
+            </span>
           </div>
         )}
 
