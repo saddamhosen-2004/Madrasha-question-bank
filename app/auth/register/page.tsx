@@ -110,11 +110,11 @@ export default function RegisterPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '24px',
+      padding: '16px',
     }}>
       <div style={{
         width: '100%',
-        maxWidth: '500px',
+        maxWidth: '480px',
         background: 'white',
         borderRadius: '20px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
@@ -123,151 +123,168 @@ export default function RegisterPage() {
         {/* Header */}
         <div style={{
           background: 'linear-gradient(135deg, #1a6b3c, #2a8a50)',
-          padding: '28px 32px 24px',
+          padding: '18px 24px 14px',
           textAlign: 'center',
         }}>
-          <div style={{ fontSize: '2rem', marginBottom: '8px' }}>🏫</div>
-          <h1 style={{ color: 'white', fontSize: '1.2rem', fontWeight: 700, marginBottom: '4px' }}>
+          <div style={{ fontSize: '1.6rem', marginBottom: '4px' }}>🏫</div>
+          <h1 style={{ color: 'white', fontSize: '1.15rem', fontWeight: 700, marginBottom: '2px' }}>
             প্রতিষ্ঠান নিবন্ধন
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', margin: 0 }}>
             নতুন অ্যাকাউন্ট তৈরি করুন — ৭ দিন বিনামূল্যে ব্যবহার করুন
           </p>
         </div>
 
-        <form onSubmit={handleRegister} style={{ padding: '24px 32px 32px' }}>
-          {/* Logo Upload */}
-          <div className="form-group" style={{ textAlign: 'center' }}>
-            <div
-              onClick={() => fileRef.current?.click()}
-              style={{
-                width: '90px', height: '90px',
-                border: '2px dashed var(--color-border)',
-                borderRadius: '50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                margin: '0 auto 10px',
-                cursor: 'pointer',
-                overflow: 'hidden',
-                background: logoPreview ? 'transparent' : 'var(--color-surface-2)',
-                transition: 'border-color 0.2s',
-              }}
-            >
-              {logoPreview ? (
-                <img src={logoPreview} alt="লোগো" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              ) : (
-                <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', textAlign: 'center', padding: '4px' }}>
-                  লোগো যোগ করুন
-                </span>
-              )}
+        <form onSubmit={handleRegister} style={{ padding: '16px 24px 20px' }}>
+          {/* Custom style for more compact inputs and form-groups on this page */}
+          <style>{`
+            .compact-form .form-group {
+              margin-bottom: 12px;
+            }
+            .compact-form .input {
+              padding: 8px 12px;
+              font-size: 0.88rem;
+            }
+            .compact-form .label {
+              margin-bottom: 4px;
+              font-size: 0.8rem;
+            }
+          `}</style>
+          
+          <div className="compact-form">
+            {/* Logo Upload */}
+            <div className="form-group" style={{ textAlign: 'center', marginBottom: '8px' }}>
+              <div
+                onClick={() => fileRef.current?.click()}
+                style={{
+                  width: '68px', height: '68px',
+                  border: '2px dashed var(--color-border)',
+                  borderRadius: '50%',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 6px',
+                  cursor: 'pointer',
+                  overflow: 'hidden',
+                  background: logoPreview ? 'transparent' : 'var(--color-surface-2)',
+                  transition: 'border-color 0.2s',
+                }}
+              >
+                {logoPreview ? (
+                  <img src={logoPreview} alt="লোগো" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <span style={{ fontSize: '0.62rem', color: 'var(--color-text-muted)', textAlign: 'center', padding: '2px' }}>
+                    লোগো যোগ করুন
+                  </span>
+                )}
+              </div>
+              <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleLogoChange} id="logo-upload" />
+              <p style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', margin: 0 }}>
+                লোগো (ঐচ্ছিক) — সর্বোচ্চ ২ MB
+              </p>
             </div>
-            <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleLogoChange} id="logo-upload" />
-            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-              লোগো (ঐচ্ছিক) — সর্বোচ্চ ২ MB
+
+            <div className="form-group">
+              <label className="label">প্রতিষ্ঠানের নাম *</label>
+              <input
+                type="text"
+                name="institution_name"
+                className="input"
+                placeholder="যেমন: দারুল উলুম মাদ্রাসা"
+                value={form.institution_name}
+                onChange={handleChange}
+                required
+                id="reg-institution-name"
+              />
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div className="form-group">
+                <label className="label">ইমেইল *</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="input"
+                  placeholder="email@gmail.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  id="reg-email"
+                />
+              </div>
+              <div className="form-group">
+                <label className="label">মোবাইল নম্বর</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  className="input"
+                  placeholder="01XXXXXXXXX"
+                  value={form.phone}
+                  onChange={handleChange}
+                  id="reg-phone"
+                />
+              </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+              <div className="form-group">
+                <label className="label">পাসওয়ার্ড *</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="input"
+                  placeholder="কমপক্ষে ৬ অক্ষর"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                  id="reg-password"
+                />
+              </div>
+              <div className="form-group">
+                <label className="label">পাসওয়ার্ড নিশ্চিত করুন *</label>
+                <input
+                  type="password"
+                  name="confirm_password"
+                  className="input"
+                  placeholder="পাসওয়ার্ড আবার লিখুন"
+                  value={form.confirm_password}
+                  onChange={handleChange}
+                  required
+                  id="reg-confirm-password"
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="label">ঠিকানা</label>
+              <input
+                type="text"
+                name="address"
+                className="input"
+                placeholder="প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)"
+                value={form.address}
+                onChange={handleChange}
+                id="reg-address"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+              style={{ width: '100%', justifyContent: 'center', marginTop: '4px', padding: '10px', fontSize: '0.92rem' }}
+              id="reg-submit"
+            >
+              {loading ? (
+                <><div className="spinner" /> নিবন্ধন হচ্ছে...</>
+              ) : 'নিবন্ধন করুন'}
+            </button>
+
+            <p style={{ textAlign: 'center', marginTop: '12px', fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: 0 }}>
+              ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}
+              <Link href="/auth/login" style={{ color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'none' }}>
+                লগইন করুন
+              </Link>
             </p>
           </div>
-
-          <div className="form-group">
-            <label className="label">প্রতিষ্ঠানের নাম *</label>
-            <input
-              type="text"
-              name="institution_name"
-              className="input"
-              placeholder="যেমন: দারুল উলুম মাদ্রাসা"
-              value={form.institution_name}
-              onChange={handleChange}
-              required
-              id="reg-institution-name"
-            />
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-            <div className="form-group">
-              <label className="label">ইমেইল *</label>
-              <input
-                type="email"
-                name="email"
-                className="input"
-                placeholder="email@gmail.com"
-                value={form.email}
-                onChange={handleChange}
-                required
-                id="reg-email"
-              />
-            </div>
-            <div className="form-group">
-              <label className="label">মোবাইল নম্বর</label>
-              <input
-                type="tel"
-                name="phone"
-                className="input"
-                placeholder="01XXXXXXXXX"
-                value={form.phone}
-                onChange={handleChange}
-                id="reg-phone"
-              />
-            </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-            <div className="form-group">
-              <label className="label">পাসওয়ার্ড *</label>
-              <input
-                type="password"
-                name="password"
-                className="input"
-                placeholder="কমপক্ষে ৬ অক্ষর"
-                value={form.password}
-                onChange={handleChange}
-                required
-                id="reg-password"
-              />
-            </div>
-            <div className="form-group">
-              <label className="label">পাসওয়ার্ড নিশ্চিত করুন *</label>
-              <input
-                type="password"
-                name="confirm_password"
-                className="input"
-                placeholder="পাসওয়ার্ড আবার লিখুন"
-                value={form.confirm_password}
-                onChange={handleChange}
-                required
-                id="reg-confirm-password"
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label className="label">ঠিকানা</label>
-            <input
-              type="text"
-              name="address"
-              className="input"
-              placeholder="প্রতিষ্ঠানের ঠিকানা (ঐচ্ছিক)"
-              value={form.address}
-              onChange={handleChange}
-              id="reg-address"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={loading}
-            style={{ width: '100%', justifyContent: 'center', marginTop: '8px', padding: '13px' }}
-            id="reg-submit"
-          >
-            {loading ? (
-              <><div className="spinner" /> নিবন্ধন হচ্ছে...</>
-            ) : 'নিবন্ধন করুন'}
-          </button>
-
-          <p style={{ textAlign: 'center', marginTop: '18px', fontSize: '0.83rem', color: 'var(--color-text-muted)' }}>
-            ইতিমধ্যে অ্যাকাউন্ট আছে?{' '}
-            <Link href="/auth/login" style={{ color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'none' }}>
-              লগইন করুন
-            </Link>
-          </p>
         </form>
       </div>
     </div>
