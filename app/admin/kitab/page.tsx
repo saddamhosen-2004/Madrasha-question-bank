@@ -168,17 +168,18 @@ export default function KitabManagement() {
 
       {isModalOpen && (
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)' }}>
-              <h3 className="font-bold text-lg">{editKitab ? 'কিতাব এডিট করুন' : 'নতুন কিতাব যুক্ত করুন'}</h3>
-              <button onClick={closeModal} className="text-gray-500 hover:text-gray-700">&times;</button>
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)', overflow: 'hidden' }}>
+            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
+              <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>{editKitab ? 'কিতাব এডিট করুন' : 'নতুন কিতাব যুক্ত করুন'}</h3>
+              <button onClick={closeModal} className="text-gray-500 hover:text-gray-700" style={{ fontSize: '1.5rem', border: 'none', background: 'transparent', cursor: 'pointer' }}>&times;</button>
             </div>
-            <div className="modal-body" style={{ padding: '24px' }}>
+            <div className="modal-body" style={{ padding: '24px 24px 24px' }}>
               <form onSubmit={handleSubmit}>
-                <div className="form-group" style={{ marginBottom: '18px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>জামাত</label>
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '10px', display: 'block', fontSize: '0.9rem' }}>জামাত</label>
                   <select 
                     className="input w-full"
+                    style={{ height: '42px', display: 'block' }}
                     required
                     value={formData.jamat_id}
                     onChange={e => setFormData({ ...formData, jamat_id: e.target.value })}
@@ -187,11 +188,12 @@ export default function KitabManagement() {
                     {jamats.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
                   </select>
                 </div>
-                <div className="form-group" style={{ marginBottom: '24px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>কিতাবের নাম</label>
+                <div className="form-group" style={{ marginBottom: '26px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '10px', display: 'block', fontSize: '0.9rem' }}>কিতাবের নাম</label>
                   <input
                     type="text"
                     className="input w-full"
+                    style={{ height: '42px', display: 'block' }}
                     placeholder="কিতাবের নাম লিখুন (উদা: তাইসীরুল মুবতাদী)"
                     required
                     value={formData.name}
@@ -199,8 +201,8 @@ export default function KitabManagement() {
                   />
                 </div>
                 <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
-                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px' }} onClick={closeModal}>বাতিল</button>
-                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px' }}>সংরক্ষণ করুন</button>
+                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px', fontSize: '0.88rem' }} onClick={closeModal}>বাতিল</button>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px', fontSize: '0.88rem' }}>সংরক্ষণ করুন</button>
                 </div>
               </form>
             </div>
