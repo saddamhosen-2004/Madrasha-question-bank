@@ -96,7 +96,7 @@ export default function JamatManagement() {
                   <th className="p-3">ক্রম</th>
                   <th className="p-3">নাম</th>
                   <th className="p-3">তৈরির তারিখ</th>
-                  <th className="p-3 text-right">অ্যাকশন</th>
+                  <th className="p-3" style={{ textAlign: 'right' }}>অ্যাকশন</th>
                 </tr>
               </thead>
               <tbody>
@@ -105,13 +105,25 @@ export default function JamatManagement() {
                     <td className="p-3">{jamat.sort_order}</td>
                     <td className="p-3">{jamat.name}</td>
                     <td className="p-3">{new Date(jamat.created_at).toLocaleDateString('bn-BD')}</td>
-                    <td className="p-3 text-right space-x-2">
-                      <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(jamat)}>
-                        <Edit size={16} />
-                      </button>
-                      <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(jamat.id)}>
-                        <Trash2 size={16} />
-                      </button>
+                    <td className="p-3">
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', alignItems: 'center' }}>
+                        <button 
+                          className="btn btn-secondary" 
+                          style={{ padding: '6px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px' }}
+                          title="সম্পাদনা" 
+                          onClick={() => openModal(jamat)}
+                        >
+                          <Edit size={14} />
+                        </button>
+                        <button 
+                          className="btn btn-danger" 
+                          style={{ padding: '6px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px' }}
+                          title="মুছে ফেলুন" 
+                          onClick={() => handleDelete(jamat.id)}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
