@@ -101,11 +101,12 @@ export default function KitabManagement() {
         <button className="btn btn-primary" onClick={() => openModal()}>+ নতুন কিতাব</button>
       </div>
 
-      <div className="card space-y-4">
-        <div className="flex gap-4 items-center">
-          <label className="font-bold">জামাত নির্বাচন করুন:</label>
+      <div className="card" style={{ padding: '24px' }}>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '20px' }}>
+          <label className="font-bold" style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>জামাত নির্বাচন করুন:</label>
           <select 
-            className="input max-w-xs"
+            className="input"
+            style={{ maxWidth: '280px', display: 'inline-block' }}
             value={selectedJamatId}
             onChange={(e) => setSelectedJamatId(e.target.value)}
           >
@@ -120,14 +121,14 @@ export default function KitabManagement() {
           ) : kitabs.length === 0 ? (
             <div className="empty-state">এই জামাতের কোনো কিতাব পাওয়া যায়নি</div>
           ) : (
-            <div className="table-wrap mt-4">
+            <div className="table-wrap" style={{ marginTop: '16px' }}>
               <table className="w-full text-left">
                 <thead>
                   <tr className="border-b" style={{ borderColor: 'var(--color-border)' }}>
                     <th className="p-3">নাম</th>
                     <th className="p-3">জামাত</th>
                     <th className="p-3">তৈরির তারিখ</th>
-                    <th className="p-3 text-right">অ্যাকশন</th>
+                    <th className="p-3" style={{ textAlign: 'right' }}>অ্যাকশন</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -136,13 +137,25 @@ export default function KitabManagement() {
                       <td className="p-3">{kitab.name}</td>
                       <td className="p-3">{kitab.jamat?.name}</td>
                       <td className="p-3">{new Date(kitab.created_at).toLocaleDateString('bn-BD')}</td>
-                      <td className="p-3 text-right space-x-2">
-                        <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(kitab)}>
-                          <Edit size={16} />
-                        </button>
-                        <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(kitab.id)}>
-                          <Trash2 size={16} />
-                        </button>
+                      <td className="p-3">
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', alignItems: 'center' }}>
+                          <button 
+                            className="btn btn-secondary" 
+                            style={{ padding: '6px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px' }}
+                            title="সম্পাদনা" 
+                            onClick={() => openModal(kitab)}
+                          >
+                            <Edit size={14} />
+                          </button>
+                          <button 
+                            className="btn btn-danger" 
+                            style={{ padding: '6px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px' }}
+                            title="মুছে ফেলুন" 
+                            onClick={() => handleDelete(kitab.id)}
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -160,33 +173,34 @@ export default function KitabManagement() {
               <h3 className="font-bold text-lg">{editKitab ? 'কিতাব এডিট করুন' : 'নতুন কিতাব যুক্ত করুন'}</h3>
               <button onClick={closeModal} className="text-gray-500 hover:text-gray-700">&times;</button>
             </div>
-            <div className="modal-body p-4">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="form-group">
-                  <label className="label">জামাত</label>
+            <div className="modal-body" style={{ padding: '24px' }}>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group" style={{ marginBottom: '18px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>জামাত</label>
                   <select 
                     className="input w-full"
                     required
                     value={formData.jamat_id}
                     onChange={e => setFormData({ ...formData, jamat_id: e.target.value })}
                   >
-                    <option value="">-- নির্বাচন করুন --</option>
+                    <option value="">-- জামাত নির্বাচন করুন --</option>
                     {jamats.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
                   </select>
                 </div>
-                <div className="form-group">
-                  <label className="label">কিতাবের নাম</label>
+                <div className="form-group" style={{ marginBottom: '24px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>কিতাবের নাম</label>
                   <input
                     type="text"
                     className="input w-full"
+                    placeholder="কিতাবের নাম লিখুন (উদা: তাইসীরুল মুবতাদী)"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
-                <div className="modal-footer flex justify-end gap-2 pt-4">
-                  <button type="button" className="btn btn-ghost" onClick={closeModal}>বাতিল</button>
-                  <button type="submit" className="btn btn-primary">সংরক্ষণ করুন</button>
+                <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px' }} onClick={closeModal}>বাতিল</button>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px' }}>সংরক্ষণ করুন</button>
                 </div>
               </form>
             </div>
