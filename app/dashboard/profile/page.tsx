@@ -158,8 +158,8 @@ export default function ProfilePage() {
           </div>
           
           <div className="text-center">
-            <h3 className="font-bold text-xl text-white" style={{ margin: '0 0 4px' }}>{institution?.name}</h3>
-            <p className="text-sm text-white/70" style={{ margin: 0 }}>{institution?.email}</p>
+            <h3 className="font-bold text-xl text-white" style={{ margin: '0 0 4px', textShadow: '0 2px 4px rgba(0,0,0,0.15)' }}>{institution?.name}</h3>
+            <p className="text-sm" style={{ color: '#e6f4ea', margin: 0, fontWeight: 500 }}>{institution?.email}</p>
           </div>
         </div>
 
@@ -167,21 +167,21 @@ export default function ProfilePage() {
         <div style={{ padding: '28px' }}>
           <form onSubmit={handleSave} className="space-y-4">
             <div className="form-group" style={{ marginBottom: '18px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
-              <input type="text" className="input" placeholder="প্রতিষ্ঠানের নাম লিখুন" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
+              <label className="label" style={{ fontWeight: 700, color: '#052e16', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
+              <input type="text" className="input" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="প্রতিষ্ঠানের নাম লিখুন" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
             </div>
             <div className="form-group" style={{ marginBottom: '18px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ইমেইল</label>
-              <input type="email" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={institution?.email || ''} disabled />
-              <p className="text-xs text-[var(--color-text-muted)] mt-1" style={{ margin: '4px 0 0' }}>লগইন ইমেইল পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
+              <label className="label" style={{ fontWeight: 700, color: '#052e16', marginBottom: '8px', display: 'block' }}>ইমেইল</label>
+              <input type="email" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#1f2937', fontWeight: 600 }} value={institution?.email || ''} disabled />
+              <p className="text-xs mt-1" style={{ margin: '6px 0 0', color: '#15803d', fontWeight: 600 }}>লগইন ইমেইল পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
             </div>
             <div className="form-group" style={{ marginBottom: '18px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোবাইল নম্বর</label>
-              <input type="text" className="input" placeholder="উদা: 017XXXXXXX" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} required />
+              <label className="label" style={{ fontWeight: 700, color: '#052e16', marginBottom: '8px', display: 'block' }}>মোবাইল নম্বর</label>
+              <input type="text" className="input" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: 017XXXXXXX" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} required />
             </div>
             <div className="form-group" style={{ marginBottom: '22px' }}>
-              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ঠিকানা</label>
-              <textarea className="input min-h-[100px]" placeholder="প্রতিষ্ঠানের সম্পূর্ণ ঠিকানা লিখুন" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} required />
+              <label className="label" style={{ fontWeight: 700, color: '#052e16', marginBottom: '8px', display: 'block' }}>ঠিকানা</label>
+              <textarea className="input min-h-[100px]" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="প্রতিষ্ঠানের সম্পূর্ণ ঠিকানা লিখুন" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} required />
             </div>
             
             <div className="pt-4 border-t border-[var(--color-border)] flex justify-end" style={{ paddingTop: '16px', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end' }}>
