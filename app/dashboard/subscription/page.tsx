@@ -69,9 +69,23 @@ export default function SubscriptionPage() {
 
   return (
     <div style={{ width: '100%' }}>
-      <div className="page-header mb-8" style={{ paddingLeft: 0, paddingRight: 0 }}>
-        <h1 className="page-title">সাবস্ক্রিপশন</h1>
-        <p className="page-subtitle">আপনার সাবস্ক্রিপশন স্ট্যাটাস এবং পেমেন্ট</p>
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        marginBottom: '28px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>ইউজার প্যানেল</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>সাবস্ক্রিপশন ব্যবস্থাপনা</h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>আপনার সাবস্ক্রিপশন স্ট্যাটাস এবং পেমেন্ট রসিদ সমূহ</p>
+        </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>

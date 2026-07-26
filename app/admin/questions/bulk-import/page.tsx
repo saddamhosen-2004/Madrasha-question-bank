@@ -256,12 +256,46 @@ export default function BulkImportPage() {
 
   return (
     <div className="page-content" style={{ padding: 0 }}>
-      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingLeft: 0, paddingRight: 0 }}>
-        <div>
-          <h1 className="page-title">বাল্ক ইম্পোর্ট</h1>
-          <p className="page-subtitle">CSV বা Excel ফাইলের মাধ্যমে একসাথে অনেক প্রশ্ন যুক্ত করুন</p>
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '16px',
+        marginBottom: '28px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>প্রশ্ন ব্যাংক ব্যবস্থাপনা</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>বাল্ক ইম্পোর্ট</h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>CSV বা Excel ফাইলের মাধ্যমে একসাথে অনেক প্রশ্ন যুক্ত করুন</p>
         </div>
-        <button onClick={handleDownloadTemplate} className="btn btn-secondary">টেমপ্লেট ডাউনলোড করুন</button>
+        <button 
+          className="btn" 
+          style={{ 
+            position: 'relative', 
+            zIndex: 1, 
+            background: 'white', 
+            color: 'var(--color-primary-dark)', 
+            fontWeight: 700, 
+            boxShadow: '0 4px 14px rgba(255,255,255,0.25)', 
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '12px',
+            cursor: 'pointer'
+          }} 
+          onClick={handleDownloadTemplate}
+        >
+          টেমপ্লেট ডাউনলোড করুন
+        </button>
       </div>
 
       <div className="card" style={{ padding: '24px', marginBottom: '24px' }}>

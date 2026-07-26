@@ -40,11 +40,25 @@ export default async function DashboardPage() {
   return (
     <div style={{ animation: 'fadeIn 0.4s ease' }}>
       {/* Welcome Header */}
-      <div className="page-header" style={{ paddingLeft: 0, marginBottom: '28px' }}>
-        <h1 className="page-title" style={{ fontSize: '1.8rem', color: 'var(--color-primary-dark)', margin: 0 }}>
-          আসসালামু আলাইকুম, {institution.name}
-        </h1>
-        <p className="page-subtitle" style={{ margin: '4px 0 0' }}>আপনার মাদ্রাসা প্রশ্নব্যাংক ড্যাশবোর্ড ওভারভিউ</p>
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        marginBottom: '28px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>স্বাগতম</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>
+            আসসালামু আলাইকুম, {institution.name}
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>আপনার মাদ্রাসা প্রশ্নব্যাংক ড্যাশবোর্ড ওভারভিউ</p>
+        </div>
       </div>
 
       {/* Subscription Status Panel */}

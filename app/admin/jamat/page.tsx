@@ -75,12 +75,45 @@ export default function JamatManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="page-header flex justify-between items-center">
-        <div>
-          <h1 className="page-title">জামাত ব্যবস্থাপনা</h1>
-          <p className="page-subtitle">সকল জামাতের তালিকা এবং ব্যবস্থাপনা</p>
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '16px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>কন্টেন্ট ব্যবস্থাপনা</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>জামাত ব্যবস্থাপনা</h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>সকল জামাতের তালিকা এবং ব্যবস্থাপনা</p>
         </div>
-        <button className="btn btn-primary" onClick={() => openModal()}>+ নতুন জামাত</button>
+        <button 
+          className="btn" 
+          style={{ 
+            position: 'relative', 
+            zIndex: 1, 
+            background: 'white', 
+            color: 'var(--color-primary-dark)', 
+            fontWeight: 700, 
+            boxShadow: '0 4px 14px rgba(255,255,255,0.25)', 
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '12px',
+            cursor: 'pointer'
+          }} 
+          onClick={() => openModal()}
+        >
+          + নতুন জামাত যুক্ত করুন
+        </button>
       </div>
 
       <div className="card">

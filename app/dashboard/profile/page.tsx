@@ -104,11 +104,27 @@ export default function ProfilePage() {
   if (loading) return <div className="flex justify-center p-8"><div className="spinner spinner-dark" /></div>
 
   return (
-    <div style={{ maxWidth: '640px', margin: '0 auto', width: '100%' }}>
-      <div className="page-header mb-8" style={{ paddingLeft: 0, paddingRight: 0 }}>
-        <h1 className="page-title">প্রতিষ্ঠান প্রোফাইল</h1>
-        <p className="page-subtitle">আপনার প্রতিষ্ঠানের তথ্য আপডেট করুন</p>
+    <div className="space-y-6">
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        marginBottom: '28px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>ইউজার প্যানেল</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>প্রতিষ্ঠান প্রোফাইল</h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>আপনার প্রতিষ্ঠানের তথ্য এবং লোগো পরিবর্তন করুন</p>
+        </div>
       </div>
+
+      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 28px 28px', width: '100%' }}>
 
       <div className="card" style={{ padding: '28px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', alignItems: 'center' }}>
@@ -172,5 +188,6 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
-  )
+  </div>
+)
 }

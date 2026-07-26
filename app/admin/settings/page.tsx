@@ -172,25 +172,27 @@ export default function SiteSettingsPage() {
   }
 
   return (
-    <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 12px' }}>
-      {/* Header */}
-      <div style={{ marginBottom: '28px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
-          <div style={{
-            width: '40px', height: '40px', borderRadius: '10px',
-            background: 'linear-gradient(135deg, #0f9e6e, #0d7a54)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <Settings style={{ width: '20px', height: '20px', color: 'white' }} />
-          </div>
-          <h1 style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--color-text)', margin: 0 }}>
-            সাইট সেটিংস
-          </h1>
+    <div className="space-y-6">
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        marginBottom: '28px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>সিস্টেম কনফিগারেশন</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>সাইট সেটিংস</h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>সাইটের নাম, লোগো এবং ব্রাউজার আইকন পরিবর্তন করুন</p>
         </div>
-        <p style={{ color: 'var(--color-text-muted)', fontSize: '0.88rem', margin: 0 }}>
-          সাইটের নাম, লোগো এবং ফেভিকন (ব্রাউজার আইকন) পরিবর্তন করুন।
-        </p>
       </div>
+
+      <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 28px 28px' }}>
 
       {/* Form Card */}
       <form onSubmit={handleSave}>
@@ -444,5 +446,6 @@ export default function SiteSettingsPage() {
         </div>
       </form>
     </div>
-  )
+  </div>
+)
 }

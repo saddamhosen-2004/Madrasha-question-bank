@@ -106,12 +106,17 @@ export default function RegisterPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #0d4022 0%, #1a6b3c 60%, #2a8a50 100%)',
+      background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 40%, #16a34a 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '16px',
+      position: 'relative',
+      overflow: 'hidden',
     }}>
+      <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', left: '-50px', bottom: '-80px', width: '180px', height: '180px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+
       <div style={{
         width: '100%',
         maxWidth: '480px',
@@ -122,8 +127,8 @@ export default function RegisterPage() {
       }}>
         {/* Header */}
         <div style={{
-          background: 'linear-gradient(135deg, #1a6b3c, #2a8a50)',
-          padding: '18px 24px 14px',
+          background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 100%)',
+          padding: '24px 24px 20px',
           textAlign: 'center',
         }}>
           <div style={{ fontSize: '1.6rem', marginBottom: '4px' }}>🏫</div>

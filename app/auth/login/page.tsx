@@ -79,16 +79,38 @@ export default function LoginPage() {
       <style>{`
         .login-bg {
           min-height: 100vh;
-          background-color: #f0f4f8;
-          background-image:
-            linear-gradient(rgba(0,180,120,0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,180,120,0.07) 1px, transparent 1px);
-          background-size: 32px 32px;
+          background: linear-gradient(135deg, #052e16 0%, #0f5d34 40%, #16a34a 100%);
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 24px;
           font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .login-bg::before {
+          content: '';
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.05);
+          top: -100px;
+          left: -100px;
+          pointer-events: none;
+        }
+
+        .login-bg::after {
+          content: '';
+          position: absolute;
+          width: 400px;
+          height: 400px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.04);
+          bottom: -150px;
+          right: -100px;
+          pointer-events: none;
         }
 
         .login-card {

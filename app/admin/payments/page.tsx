@@ -91,9 +91,23 @@ function PaymentsContent() {
 
   return (
     <div className="space-y-6">
-      <div className="page-header">
-        <h1 className="page-title">পেমেন্ট যাচাইকরণ</h1>
-        <p className="page-subtitle">সাবস্ক্রিপশন পেমেন্ট ম্যানেজমেন্ট</p>
+      {/* Colorful Hero Banner */}
+      <div style={{
+        background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
+        padding: '32px 32px 28px',
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: '0 0 24px 24px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        marginBottom: '28px'
+      }}>
+        <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 6px' }}>ব্যবস্থাপনা প্যানেল</p>
+          <h1 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, margin: '0 0 6px' }}>পেমেন্ট যাচাইকরণ</h1>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.88rem', margin: 0 }}>প্রতিষ্ঠানের পাঠানো সাবস্ক্রিপশন ফি ও ট্রানজেকশন যাচাই করুন</p>
+        </div>
       </div>
 
       <div className="tabs flex space-x-2 border-b" style={{ borderColor: 'var(--color-border)' }}>
