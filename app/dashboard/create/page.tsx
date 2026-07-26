@@ -328,12 +328,12 @@ export default function ManualCreatePage() {
 
       {/* Basket Bar */}
       {basket.length > 0 && (
-        <div className="fixed bottom-0 left-[260px] right-0 bg-[var(--color-surface)] border-t border-[var(--color-border)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 flex justify-between items-center z-20">
-          <div>
-            <span className="font-bold text-[var(--color-text)] mr-4">মোট নির্বাচিত: <span className="text-[var(--color-primary)] text-xl">{basket.length}</span> টি প্রশ্ন</span>
+        <div className="fixed bottom-0 left-0 md:left-[260px] right-0 bg-[var(--color-surface)] border-t border-[var(--color-border)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 flex flex-col sm:flex-row justify-between items-center gap-3 z-20">
+          <div className="text-center sm:text-left">
+            <span className="font-bold text-[var(--color-text)] mr-4 block sm:inline-block">মোট নির্বাচিত: <span className="text-[var(--color-primary)] text-xl">{basket.length}</span> টি প্রশ্ন</span>
             <span className="font-bold text-[var(--color-text)]">মোট মার্কস: <span className="text-[var(--color-accent)] text-xl">{currentTotalMarks}</span></span>
           </div>
-          <button onClick={() => setShowHeaderModal(true)} className="btn btn-primary btn-lg">
+          <button onClick={() => setShowHeaderModal(true)} className="btn btn-primary w-full sm:w-auto btn-lg">
             প্রশ্নপত্র তৈরি করুন
           </button>
         </div>
