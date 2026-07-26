@@ -47,7 +47,7 @@ export default async function DashboardPage() {
         position: 'relative',
         overflow: 'hidden',
         borderRadius: '0 0 24px 24px',
-        boxShadow: '0 8px 32px rgba(15,93,52,0.3)', marginBottom: '42px',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)', marginBottom: '20px',
         }}>
         <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         background: '#ffffff', 
         borderLeft: '4px solid var(--color-primary)',
         padding: institution.subscription_status === 'trial' ? '14px 20px' : '24px',
-        marginBottom: '28px',
+        marginBottom: '20px',
         }}>
         {institution.subscription_status === 'trial' && (
           <div style={{ textAlign: 'center', width: '100%' }}>
