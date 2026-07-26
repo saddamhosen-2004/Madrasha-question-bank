@@ -158,7 +158,7 @@ export default function ProfilePage() {
           </div>
           
           <div className="text-center">
-            <h3 className="font-bold text-xl text-white" style={{ margin: '0 0 4px', textShadow: '0 2px 4px rgba(0,0,0,0.15)' }}>{institution?.name}</h3>
+            <h3 className="font-bold text-xl" style={{ color: '#ffffff', margin: '0 0 4px', textShadow: '0 2px 4px rgba(0,0,0,0.15)' }}>{institution?.name}</h3>
             <p className="text-sm" style={{ color: '#e6f4ea', margin: 0, fontWeight: 500 }}>{institution?.email}</p>
           </div>
         </div>
