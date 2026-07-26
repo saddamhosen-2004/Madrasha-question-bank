@@ -110,19 +110,7 @@ export default function SubscriptionPage() {
                     <span style={{ fontWeight: 700, fontSize: '0.8rem', color: method === 'bkash' ? '#e2136e' : 'var(--color-text)' }}>bKash</span>
                   </label>
 
-                  {/* 2nd: Rocket */}
-                  <label style={{ 
-                    flex: '1', minWidth: '90px', border: '2px solid', borderRadius: '12px', padding: '8px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
-                    borderColor: method === 'rocket' ? '#8c1562' : 'var(--color-border)',
-                    background: method === 'rocket' ? '#8c156210' : 'var(--color-surface)',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px'
-                  }}>
-                    <input type="radio" name="method" value="rocket" className="hidden" checked={method === 'rocket'} onChange={() => setMethod('rocket')} />
-                    <img src="/rocket.jpg" alt="Rocket" style={{ height: '40px', width: 'auto', objectFit: 'contain', borderRadius: '8px' }} />
-                    <span style={{ fontWeight: 700, fontSize: '0.8rem', color: method === 'rocket' ? '#8c1562' : 'var(--color-text)' }}>Rocket</span>
-                  </label>
-
-                  {/* 3rd: Nagad */}
+                  {/* 2nd: Nagad */}
                   <label style={{ 
                     flex: '1', minWidth: '90px', border: '2px solid', borderRadius: '12px', padding: '8px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
                     borderColor: method === 'nagad' ? '#ed1c24' : 'var(--color-border)',
@@ -130,8 +118,20 @@ export default function SubscriptionPage() {
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px'
                   }}>
                     <input type="radio" name="method" value="nagad" className="hidden" checked={method === 'nagad'} onChange={() => setMethod('nagad')} />
-                    <img src="/nagad.png" alt="Nagad" style={{ height: '40px', width: 'auto', objectFit: 'contain', borderRadius: '8px' }} />
+                    <img src="/rocket.jpg" alt="Nagad" style={{ height: '40px', width: 'auto', objectFit: 'contain', borderRadius: '8px' }} />
                     <span style={{ fontWeight: 700, fontSize: '0.8rem', color: method === 'nagad' ? '#ed1c24' : 'var(--color-text)' }}>Nagad</span>
+                  </label>
+
+                  {/* 3rd: Rocket */}
+                  <label style={{ 
+                    flex: '1', minWidth: '90px', border: '2px solid', borderRadius: '12px', padding: '8px', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s',
+                    borderColor: method === 'rocket' ? '#8c1562' : 'var(--color-border)',
+                    background: method === 'rocket' ? '#8c156210' : 'var(--color-surface)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px'
+                  }}>
+                    <input type="radio" name="method" value="rocket" className="hidden" checked={method === 'rocket'} onChange={() => setMethod('rocket')} />
+                    <img src="/nagad.png" alt="Rocket" style={{ height: '40px', width: 'auto', objectFit: 'contain', borderRadius: '8px' }} />
+                    <span style={{ fontWeight: 700, fontSize: '0.8rem', color: method === 'rocket' ? '#8c1562' : 'var(--color-text)' }}>Rocket</span>
                   </label>
                 </div>
               </div>
