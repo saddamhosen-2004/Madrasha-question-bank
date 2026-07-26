@@ -222,8 +222,8 @@ export default function QuestionsManagement() {
       </div>
 
       {/* Filters */}
-      <div className="card space-y-4 bg-gray-50/50">
-        <h3 className="font-bold border-b pb-2 mb-4" style={{ borderColor: 'var(--color-border)' }}>ফিল্টার সমূহ</h3>
+      <div className="card bg-gray-50/50" style={{ padding: '24px' }}>
+        <h3 className="font-bold border-b" style={{ borderColor: 'var(--color-border)', paddingBottom: '10px', marginBottom: '18px', fontSize: '1.05rem', color: 'var(--color-text)' }}>ফিল্টার সমূহ</h3>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <select className="input" value={filterJamatId} onChange={e => setFilterJamatId(e.target.value)}>
             <option value="">সকল জামাত</option>
@@ -252,7 +252,7 @@ export default function QuestionsManagement() {
         </div>
       </div>
 
-      <div className="card">
+      <div className="card" style={{ padding: '24px' }}>
         {loading ? (
           <div className="flex justify-center py-8"><div className="spinner"></div></div>
         ) : questions.length === 0 ? (
@@ -267,7 +267,7 @@ export default function QuestionsManagement() {
                   <th className="p-3">ভাষা</th>
                   <th className="p-3">মার্কস</th>
                   <th className="p-3">কঠিনতা</th>
-                  <th className="p-3 text-right">অ্যাকশন</th>
+                  <th className="p-3" style={{ textAlign: 'right' }}>অ্যাকশন</th>
                 </tr>
               </thead>
               <tbody>
@@ -289,13 +289,25 @@ export default function QuestionsManagement() {
                         {q.difficulty === 'easy' ? 'সহজ' : q.difficulty === 'medium' ? 'মাঝারি' : 'কঠিন'}
                       </span>
                     </td>
-                    <td className="p-3 text-right space-x-2">
-                      <button className="btn btn-sm btn-secondary btn-icon" title="সম্পাদনা" onClick={() => openModal(q)}>
-                        <Edit2 size={14} />
-                      </button>
-                      <button className="btn btn-sm btn-danger btn-icon" title="মুছে ফেলুন" onClick={() => handleDelete(q.id)}>
-                        <Trash2 size={14} />
-                      </button>
+                    <td className="p-3">
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', alignItems: 'center' }}>
+                        <button 
+                          className="btn btn-secondary" 
+                          style={{ padding: '6px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px' }}
+                          title="সম্পাদনা" 
+                          onClick={() => openModal(q)}
+                        >
+                          <Edit2 size={14} />
+                        </button>
+                        <button 
+                          className="btn btn-danger" 
+                          style={{ padding: '6px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '6px' }}
+                          title="মুছে ফেলুন" 
+                          onClick={() => handleDelete(q.id)}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
