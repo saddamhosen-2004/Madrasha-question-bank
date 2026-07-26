@@ -116,7 +116,7 @@ function InstitutionsContent() {
         <p className="page-subtitle">সকল নিবন্ধিত প্রতিষ্ঠানের তালিকা</p>
       </div>
 
-      <div className="tabs flex space-x-2 border-b overflow-x-auto" style={{ borderColor: 'var(--color-border)' }}>
+      <div className="tabs flex space-x-2 border-b overflow-x-auto" style={{ borderColor: 'var(--color-border)', marginBottom: '24px' }}>
         {[
           { id: 'all', label: 'সকল' },
           { id: 'pending', label: 'অনুমোদনের অপেক্ষায়' },
@@ -133,7 +133,7 @@ function InstitutionsContent() {
         ))}
       </div>
 
-      <div className="card">
+      <div className="card" style={{ padding: '24px' }}>
         {loading ? (
           <div className="flex justify-center py-8"><div className="spinner"></div></div>
         ) : institutions.length === 0 ? (
@@ -149,7 +149,7 @@ function InstitutionsContent() {
                   <th className="p-3">ফোন</th>
                   <th className="p-3">স্ট্যাটাস</th>
                   <th className="p-3">তারিখ</th>
-                  <th className="p-3 text-right">অ্যাকশন</th>
+                  <th className="p-3" style={{ textAlign: 'right' }}>অ্যাকশন</th>
                 </tr>
               </thead>
               <tbody>
@@ -167,18 +167,32 @@ function InstitutionsContent() {
                     <td className="p-3">{inst.phone || '-'}</td>
                     <td className="p-3">{renderBadge(inst)}</td>
                     <td className="p-3">{new Date(inst.created_at).toLocaleDateString('bn-BD')}</td>
-                    <td className="p-3 text-right space-x-2">
-                      <button className="btn btn-sm btn-secondary inline-flex items-center gap-1" onClick={() => setViewInst(inst)}>
-                        <Eye size={14} /> বিস্তারিত
-                      </button>
-                      {!inst.is_approved && (
-                        <button className="btn btn-sm btn-success inline-flex items-center gap-1" onClick={() => handleApprove(inst.id)}>
-                          <CheckCircle size={14} /> অনুমোদন
+                    <td className="p-3">
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', alignItems: 'center' }}>
+                        <button 
+                          className="btn btn-secondary" 
+                          style={{ padding: '6px 12px', fontSize: '0.82rem', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px' }} 
+                          onClick={() => setViewInst(inst)}
+                        >
+                          <Eye size={14} /> বিস্তারিত
                         </button>
-                      )}
-                      <button className="btn btn-sm btn-primary inline-flex items-center gap-1" onClick={() => setSubModalInst(inst)}>
-                        <Calendar size={14} /> সাবস্ক্রিপশন
-                      </button>
+                        {!inst.is_approved && (
+                          <button 
+                            className="btn btn-success" 
+                            style={{ padding: '6px 12px', fontSize: '0.82rem', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px' }} 
+                            onClick={() => handleApprove(inst.id)}
+                          >
+                            <CheckCircle size={14} /> অনুমোদন
+                          </button>
+                        )}
+                        <button 
+                          className="btn btn-primary" 
+                          style={{ padding: '6px 12px', fontSize: '0.82rem', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '4px' }} 
+                          onClick={() => setSubModalInst(inst)}
+                        >
+                          <Calendar size={14} /> সাবস্ক্রিপশন
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

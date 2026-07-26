@@ -255,14 +255,28 @@ export default function BulkImportPage() {
   };
 
   return (
-    <div className="page-content">
-      <div className="page-header">
-        <h1 className="page-title">বাল্ক ইম্পোর্ট</h1>
+    <div className="page-content" style={{ padding: 0 }}>
+      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingLeft: 0, paddingRight: 0 }}>
+        <div>
+          <h1 className="page-title">বাল্ক ইম্পোর্ট</h1>
+          <p className="page-subtitle">CSV বা Excel ফাইলের মাধ্যমে একসাথে অনেক প্রশ্ন যুক্ত করুন</p>
+        </div>
         <button onClick={handleDownloadTemplate} className="btn btn-secondary">টেমপ্লেট ডাউনলোড করুন</button>
       </div>
 
-      <div className="card p-6 mb-6">
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center flex flex-col items-center justify-center gap-4">
+      <div className="card" style={{ padding: '24px', marginBottom: '24px' }}>
+        <div style={{
+          border: '2px dashed var(--color-border)',
+          borderRadius: '12px',
+          padding: '40px 20px',
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '16px',
+          backgroundColor: '#fafbfc'
+        }}>
           <input 
             type="file" 
             accept=".csv, .xlsx" 
@@ -270,18 +284,18 @@ export default function BulkImportPage() {
             className="hidden" 
             id="file-upload" 
           />
-          <label htmlFor="file-upload" className="cursor-pointer bg-blue-50 text-blue-600 px-6 py-3 rounded-md border border-blue-200 hover:bg-blue-100 transition-colors">
+          <label htmlFor="file-upload" className="btn btn-secondary" style={{ cursor: 'pointer', padding: '10px 20px' }}>
             ফাইল নির্বাচন করুন (.csv, .xlsx)
           </label>
           {file && (
-            <div className="text-sm text-gray-600 font-medium">
-              নির্বাচিত ফাইল: {file.name}
+            <div style={{ marginTop: '8px', color: 'var(--color-primary)' }}>
+              📄 নির্বাচিত ফাইল: <strong>{file.name}</strong>
             </div>
           )}
         </div>
         
         {file && (
-          <div className="mt-4 flex justify-end">
+          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
             <button 
               onClick={handleParse} 
               disabled={isParsing}
@@ -294,17 +308,17 @@ export default function BulkImportPage() {
       </div>
 
       {rows.length > 0 && (
-        <div className="card p-6">
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex gap-4">
+        <div className="card" style={{ padding: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', gap: '8px' }}>
               <div className="badge badge-success">সঠিক: {summary.valid}</div>
               <div className="badge badge-danger">ভুল: {summary.invalid}</div>
             </div>
             
             {summary.valid > 0 && (
-              <div className="flex items-center gap-4">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 {isImporting && (
-                  <span className="text-sm font-medium">{progress.current} / {progress.total} প্রশ্ন import হয়েছে</span>
+                  <span style={{ color: 'var(--color-text-muted)' }}>{progress.current} / {progress.total} প্রশ্ন import হয়েছে</span>
                 )}
                 <button 
                   onClick={handleImport} 
@@ -319,8 +333,8 @@ export default function BulkImportPage() {
 
           <div className="table-wrap">
             <table className="w-full text-sm text-left">
-              <thead className="bg-gray-50 border-b">
-                <tr>
+              <thead>
+                <tr className="border-b" style={{ borderColor: 'var(--color-border)' }}>
                   <th className="p-3">অবস্থা</th>
                   <th className="p-3">জামাত</th>
                   <th className="p-3">কিতাব</th>
@@ -333,7 +347,7 @@ export default function BulkImportPage() {
               </thead>
               <tbody>
                 {rows.map((row, idx) => (
-                  <tr key={idx} className={`border-b ${!row.isValid ? 'bg-red-50' : 'hover:bg-gray-50'}`}>
+                  <tr key={idx} className="border-b" style={{ backgroundColor: !row.isValid ? '#fdf2f2' : 'transparent', borderColor: 'var(--color-border)' }}>
                     <td className="p-3">
                       {row.isValid ? 
                         <span className="text-green-600 font-bold">✓</span> : 
@@ -343,10 +357,10 @@ export default function BulkImportPage() {
                     <td className="p-3">{row.jamat_name}</td>
                     <td className="p-3">{row.kitab_name}</td>
                     <td className="p-3">{row.chapter_name}</td>
-                    <td className="p-3">{row.type}</td>
+                    <td className="p-3 uppercase">{row.type}</td>
                     <td className="p-3 truncate max-w-xs" title={row.question_text}>{row.question_text}</td>
                     <td className="p-3">{row.marks}</td>
-                    <td className="p-3 text-red-600 text-xs">
+                    <td className="p-3 text-red-600 text-xs" style={{ whiteSpace: 'normal', color: 'var(--color-danger)' }}>
                       {!row.isValid && row.errors.join(', ')}
                     </td>
                   </tr>
