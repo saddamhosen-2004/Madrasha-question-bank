@@ -319,56 +319,56 @@ export default function QuestionsManagement() {
 
       {isModalOpen && (
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto py-8">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10" style={{ borderColor: 'var(--color-border)' }}>
-              <h3 className="font-bold text-lg">{editQuestion ? 'প্রশ্ন এডিট করুন' : 'নতুন প্রশ্ন যুক্ত করুন'}</h3>
-              <button type="button" onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700">
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflow: 'hidden' }}>
+            <div className="modal-header p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
+              <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>{editQuestion ? 'প্রশ্ন এডিট করুন' : 'নতুন প্রশ্ন যুক্ত করুন'}</h3>
+              <button type="button" onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700" style={{ border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
                 <XCircle size={24} />
               </button>
             </div>
-            <div className="modal-body p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="modal-body" style={{ padding: '24px' }}>
+              <form onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ marginBottom: '20px' }}>
                   <div className="form-group mb-0">
-                    <label className="label">জামাত</label>
-                    <select className="input w-full" required value={modalJamatId} onChange={e => setModalJamatId(e.target.value)}>
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>জামাত</label>
+                    <select className="input w-full" style={{ height: '42px', marginTop: '8px', display: 'block' }} required value={modalJamatId} onChange={e => setModalJamatId(e.target.value)}>
                       <option value="">নির্বাচন করুন</option>
                       {jamats.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
                     </select>
                   </div>
                   <div className="form-group mb-0">
-                    <label className="label">কিতাব</label>
-                    <select className="input w-full" required value={modalKitabId} onChange={e => setModalKitabId(e.target.value)} disabled={!modalJamatId}>
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>কিতাব</label>
+                    <select className="input w-full" style={{ height: '42px', marginTop: '8px', display: 'block' }} required value={modalKitabId} onChange={e => setModalKitabId(e.target.value)} disabled={!modalJamatId}>
                       <option value="">নির্বাচন করুন</option>
                       {modalKitabs.map(k => <option key={k.id} value={k.id}>{k.name}</option>)}
                     </select>
                   </div>
                   <div className="form-group mb-0">
-                    <label className="label">চ্যাপ্টার</label>
-                    <select className="input w-full" required value={modalChapterId} onChange={e => setModalChapterId(e.target.value)} disabled={!modalKitabId}>
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>চ্যাপ্টার</label>
+                    <select className="input w-full" style={{ height: '42px', marginTop: '8px', display: 'block' }} required value={modalChapterId} onChange={e => setModalChapterId(e.target.value)} disabled={!modalKitabId}>
                       <option value="">নির্বাচন করুন</option>
                       {modalChapters.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ marginBottom: '20px' }}>
                   <div className="form-group mb-0">
-                    <label className="label">প্রশ্নের ধরন</label>
-                    <div className="flex gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input type="radio" name="type" value="mcq" checked={formData.type === 'mcq'} onChange={() => setFormData({ ...formData, type: 'mcq' as QuestionType })} />
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>প্রশ্নের ধরন</label>
+                    <div className="flex gap-4" style={{ marginTop: '8px', display: 'flex', alignItems: 'center', height: '42px', gap: '16px' }}>
+                      <label className="flex items-center gap-2 cursor-pointer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem' }}>
+                        <input type="radio" name="type" value="mcq" checked={formData.type === 'mcq'} onChange={() => setFormData({ ...formData, type: 'mcq' as QuestionType })} style={{ width: '16px', height: '16px' }} />
                         MCQ
                       </label>
-                      <label className="flex items-center gap-2 cursor-pointer">
-                        <input type="radio" name="type" value="written" checked={formData.type === 'written'} onChange={() => setFormData({ ...formData, type: 'written' as QuestionType })} />
+                      <label className="flex items-center gap-2 cursor-pointer" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem' }}>
+                        <input type="radio" name="type" value="written" checked={formData.type === 'written'} onChange={() => setFormData({ ...formData, type: 'written' as QuestionType })} style={{ width: '16px', height: '16px' }} />
                         লিখিত
                       </label>
                     </div>
                   </div>
                   <div className="form-group mb-0">
-                    <label className="label">ভাষা</label>
-                    <select className="input w-full" value={formData.language} onChange={e => setFormData({ ...formData, language: e.target.value as QuestionLanguage })}>
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>ভাষা</label>
+                    <select className="input w-full" style={{ height: '42px', marginTop: '8px', display: 'block' }} value={formData.language} onChange={e => setFormData({ ...formData, language: e.target.value as QuestionLanguage })}>
                       <option value="bangla">বাংলা</option>
                       <option value="arabic">আরবি</option>
                       <option value="farsi">ফার্সি</option>
@@ -377,11 +377,12 @@ export default function QuestionsManagement() {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label className="label">প্রশ্ন</label>
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>প্রশ্ন</label>
                   <textarea
                     required
                     className={`input w-full h-24 ${isRtl ? 'input-rtl' : ''}`}
+                    style={{ marginTop: '8px', display: 'block' }}
                     dir={isRtl ? 'rtl' : 'ltr'}
                     value={formData.question_text}
                     onChange={e => setFormData({ ...formData, question_text: e.target.value })}
@@ -389,23 +390,24 @@ export default function QuestionsManagement() {
                 </div>
 
                 {formData.type === 'mcq' && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50/50 p-4 rounded border" style={{ borderColor: 'var(--color-border)' }}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50/50 p-4 rounded border" style={{ borderColor: 'var(--color-border)', marginBottom: '20px' }}>
                     {['a', 'b', 'c', 'd'].map((opt) => (
                       <div key={opt} className="form-group mb-0">
-                        <label className="label uppercase">অপশন {opt === 'a' ? 'ক' : opt === 'b' ? 'খ' : opt === 'c' ? 'গ' : 'ঘ'}</label>
+                        <label className="label uppercase" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.85rem' }}>অপশন {opt === 'a' ? 'ক' : opt === 'b' ? 'খ' : opt === 'c' ? 'গ' : 'ঘ'}</label>
                         <input
                           required
                           type="text"
                           className={`input w-full ${isRtl ? 'input-rtl' : ''}`}
+                          style={{ height: '42px', marginTop: '8px', display: 'block' }}
                           dir={isRtl ? 'rtl' : 'ltr'}
                           value={formData[`option_${opt}` as keyof typeof formData] as string}
                           onChange={e => setFormData({ ...formData, [`option_${opt}`]: e.target.value })}
                         />
                       </div>
                     ))}
-                    <div className="form-group md:col-span-2 mb-0">
-                      <label className="label text-green-700 font-bold">সঠিক উত্তর</label>
-                      <select className="input w-full" value={formData.correct_answer} onChange={e => setFormData({ ...formData, correct_answer: e.target.value })}>
+                    <div className="form-group md:col-span-2 mb-0" style={{ marginTop: '8px' }}>
+                      <label className="label text-green-700 font-bold" style={{ display: 'block', fontSize: '0.88rem' }}>সঠিক উত্তর</label>
+                      <select className="input w-full" style={{ height: '42px', marginTop: '8px', display: 'block' }} value={formData.correct_answer} onChange={e => setFormData({ ...formData, correct_answer: e.target.value })}>
                         <option value="a">ক (Option A)</option>
                         <option value="b">খ (Option B)</option>
                         <option value="c">গ (Option C)</option>
@@ -415,22 +417,23 @@ export default function QuestionsManagement() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ marginBottom: '24px' }}>
                   <div className="form-group mb-0">
-                    <label className="label">মার্কস</label>
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>মার্কস</label>
                     <input
                       type="number"
                       required
                       min="0.5"
                       step="0.5"
                       className="input w-full"
+                      style={{ height: '42px', marginTop: '8px', display: 'block' }}
                       value={formData.marks}
                       onChange={e => setFormData({ ...formData, marks: e.target.value })}
                     />
                   </div>
                   <div className="form-group mb-0">
-                    <label className="label">কঠিনতা</label>
-                    <select className="input w-full" value={formData.difficulty} onChange={e => setFormData({ ...formData, difficulty: e.target.value as DifficultyLevel })}>
+                    <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>কঠিনতা</label>
+                    <select className="input w-full" style={{ height: '42px', marginTop: '8px', display: 'block' }} value={formData.difficulty} onChange={e => setFormData({ ...formData, difficulty: e.target.value as DifficultyLevel })}>
                       <option value="easy">সহজ (Easy)</option>
                       <option value="medium">মাঝারি (Medium)</option>
                       <option value="hard">কঠিন (Hard)</option>
@@ -438,9 +441,9 @@ export default function QuestionsManagement() {
                   </div>
                 </div>
 
-                <div className="modal-footer flex justify-end gap-2 pt-4 border-t mt-6" style={{ borderColor: 'var(--color-border)' }}>
-                  <button type="button" className="btn btn-secondary" onClick={() => setIsModalOpen(false)}>বাতিল</button>
-                  <button type="submit" className="btn btn-primary px-8">সংরক্ষণ করুন</button>
+                <div className="modal-footer flex justify-end gap-2 pt-4 border-t" style={{ borderColor: 'var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px', padding: '16px 0 0' }}>
+                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px', fontSize: '0.88rem' }} onClick={() => setIsModalOpen(false)}>বাতিল</button>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px', fontSize: '0.88rem' }}>সংরক্ষণ করুন</button>
                 </div>
               </form>
             </div>
