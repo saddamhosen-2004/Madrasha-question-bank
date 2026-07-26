@@ -204,68 +204,81 @@ function InstitutionsContent() {
 
       {/* Details Modal */}
       {viewInst && (
-        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-lg" style={{ backgroundColor: 'var(--color-surface)', overflow: 'hidden' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
-              <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>প্রতিষ্ঠান বিস্তারিত</h3>
-              <button onClick={() => setViewInst(null)} className="text-gray-500 hover:text-gray-700" style={{ border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><XCircle size={24} /></button>
+        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50" style={{ padding: '16px' }}>
+          <div className="modal w-full max-w-lg" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
+            
+            {/* Hero Header */}
+            <div style={{ background: 'linear-gradient(135deg, var(--color-primary) 0%, #0d5c33 100%)', padding: '28px 28px 48px', position: 'relative' }}>
+              <button 
+                onClick={() => setViewInst(null)} 
+                style={{ position: 'absolute', top: '16px', right: '16px', border: 'none', background: 'rgba(255,255,255,0.2)', cursor: 'pointer', display: 'flex', alignItems: 'center', borderRadius: '50%', padding: '6px', color: 'white' }}
+              >
+                <XCircle size={20} />
+              </button>
+              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.78rem', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>প্রতিষ্ঠান বিস্তারিত</p>
+              <h3 style={{ color: 'white', fontSize: '1.3rem', fontWeight: 700, margin: 0 }}>{viewInst.name}</h3>
+              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem', margin: '6px 0 0' }}>{viewInst.email}</p>
             </div>
-            <div className="modal-body" style={{ padding: '24px' }}>
-              <div className="flex items-center space-x-4 mb-6" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                {viewInst.logo_url ? (
-                  <img src={viewInst.logo_url} alt="logo" className="w-16 h-16 rounded-full object-cover border" style={{ width: '64px', height: '64px', borderRadius: '50%' }} />
-                ) : (
-                  <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--color-primary-50)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.5rem' }}>
-                    {viewInst.name?.charAt(0) || 'I'}
-                  </div>
+
+            {/* Avatar Overlap */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-36px', marginBottom: '4px' }}>
+              {viewInst.logo_url ? (
+                <img src={viewInst.logo_url} alt="logo" style={{ width: '72px', height: '72px', borderRadius: '50%', border: '4px solid white', objectFit: 'cover', boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }} />
+              ) : (
+                <div style={{ width: '72px', height: '72px', borderRadius: '50%', border: '4px solid white', background: 'linear-gradient(135deg, #1a6b3c, #0d5c33)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.8rem', color: 'white', boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }}>
+                  {viewInst.name?.charAt(0)?.toUpperCase() || 'প'}
+                </div>
+              )}
+            </div>
+
+            {/* Info Body */}
+            <div style={{ padding: '8px 24px 24px' }}>
+              {/* Status Row */}
+              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                {renderBadge(viewInst)}
+                {viewInst.is_approved && (
+                  <span style={{ marginLeft: '8px', fontSize: '0.78rem', color: '#16a34a', background: '#f0fdf4', padding: '3px 10px', borderRadius: '20px', border: '1px solid #bbf7d0', fontWeight: 600 }}>✓ অনুমোদিত</span>
                 )}
-                <div>
-                  <h4 className="font-bold text-xl" style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-text)' }}>{viewInst.name}</h4>
-                  <p className="text-gray-500" style={{ margin: '4px 0 0', fontSize: '0.85rem' }}>{viewInst.email}</p>
-                </div>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '24px' }}>
-                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>ফোন</span>
-                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.phone || '-'}</span>
-                </div>
-                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>ঠিকানা</span>
-                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.address || '-'}</span>
-                </div>
-                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>অনুমোদিত</span>
-                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.is_approved ? 'হ্যাঁ' : 'না'}</span>
-                </div>
-                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>স্ট্যাটাস</span>
-                  <span style={{ display: 'block' }}>{renderBadge(viewInst)}</span>
-                </div>
-                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>প্যাকেজ মেয়াদ</span>
-                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.subscription_expiry ? new Date(viewInst.subscription_expiry).toLocaleDateString('bn-BD') : '-'}</span>
-                </div>
-                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>যোগদানের তারিখ</span>
-                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{new Date(viewInst.created_at).toLocaleDateString('bn-BD')}</span>
-                </div>
+
+              {/* Info Cards Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
+                {[
+                  { icon: '📞', label: 'ফোন নম্বর', value: viewInst.phone || 'প্রদান করা হয়নি' },
+                  { icon: '📍', label: 'ঠিকানা', value: viewInst.address || 'প্রদান করা হয়নি' },
+                  { icon: '📦', label: 'প্যাকেজ মেয়াদ', value: viewInst.subscription_expiry ? new Date(viewInst.subscription_expiry).toLocaleDateString('bn-BD') : 'নির্ধারিত নয়' },
+                  { icon: '📅', label: 'যোগদানের তারিখ', value: new Date(viewInst.created_at).toLocaleDateString('bn-BD') },
+                ].map((item, i) => (
+                  <div key={i} style={{ background: '#f8fafb', borderRadius: '12px', padding: '14px 16px', border: '1px solid #eef2f7' }}>
+                    <div style={{ fontSize: '1.1rem', marginBottom: '6px' }}>{item.icon}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '4px', fontWeight: 500 }}>{item.label}</div>
+                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.3 }}>{item.value}</div>
+                  </div>
+                ))}
               </div>
-              <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+
+              {/* Action Footer */}
+              <div style={{ display: 'flex', gap: '10px', paddingTop: '16px', borderTop: '1px solid var(--color-border)' }}>
                 <button 
-                  className="btn" 
                   style={{ 
-                    padding: '8px 18px', 
-                    fontSize: '0.88rem',
-                    background: viewInst.subscription_status === 'blocked' ? 'var(--color-success)' : 'var(--color-danger)', 
-                    color: 'white' 
+                    flex: 1, padding: '11px', borderRadius: '10px', border: 'none', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', fontFamily: 'inherit',
+                    background: viewInst.subscription_status === 'blocked' ? '#f0fdf4' : '#fef2f2',
+                    color: viewInst.subscription_status === 'blocked' ? '#16a34a' : '#dc2626',
+                    transition: 'opacity 0.15s'
                   }} 
                   onClick={() => { handleBlockUnblock(viewInst); setViewInst(null) }}
                 >
-                  {viewInst.subscription_status === 'blocked' ? 'আনব্লক করুন' : 'ব্লক করুন'}
+                  {viewInst.subscription_status === 'blocked' ? '🔓 আনব্লক করুন' : '🚫 ব্লক করুন'}
                 </button>
-                <button className="btn btn-ghost" style={{ padding: '8px 18px', fontSize: '0.88rem' }} onClick={() => setViewInst(null)}>বন্ধ করুন</button>
+                <button 
+                  style={{ flex: 1, padding: '11px', borderRadius: '10px', border: '1px solid var(--color-border)', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', background: 'white', color: 'var(--color-text)', fontFamily: 'inherit' }}
+                  onClick={() => setViewInst(null)}
+                >
+                  বন্ধ করুন
+                </button>
               </div>
             </div>
+
           </div>
         </div>
       )}
