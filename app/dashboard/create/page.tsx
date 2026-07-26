@@ -211,18 +211,23 @@ export default function ManualCreatePage() {
         <div className="flex justify-center p-8"><div className="spinner spinner-dark" /></div>
       ) : (
         selectedKitab && chapters.length > 0 && (
-          <div>
-            <h2 className="text-xl font-bold mb-4 text-[var(--color-text)]">অধ্যায়সমূহ</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+          <div style={{ marginTop: '40px' }}>
+            <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--color-text)', marginBottom: '24px', display: 'block' }}>অধ্যায়সমূহ</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" style={{ width: '100%' }}>
               {chapters.map(chapter => (
-                <div key={chapter.id} className="card p-5 cursor-pointer hover:border-[var(--color-primary)] transition-colors w-full bg-[var(--color-surface)]" onClick={() => openChapterModal(chapter)}>
-                  <h3 className="font-bold text-lg mb-2 text-[var(--color-text)]" style={{ margin: '0 0 8px' }}>{chapter.name}</h3>
-                  <div className="flex justify-between items-center mt-4" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span className="badge badge-info">{chapter.question_count} টি প্রশ্ন</span>
+                <div 
+                  key={chapter.id} 
+                  className="card p-5 cursor-pointer hover:border-[var(--color-primary)] transition-all bg-[var(--color-surface)]" 
+                  style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px', boxSizing: 'border-box' }}
+                  onClick={() => openChapterModal(chapter)}
+                >
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-text)', margin: 0 }}>{chapter.name}</h3>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                    <span className="badge badge-info" style={{ fontSize: '0.82rem', padding: '4px 10px' }}>{chapter.question_count} টি প্রশ্ন</span>
                     <button className="btn btn-sm btn-ghost text-[var(--color-primary)]" style={{ fontSize: '0.82rem', padding: '6px 12px' }}>প্রশ্ন দেখুন</button>
                   </div>
                   {basket.filter(q => q.chapter_id === chapter.id).length > 0 && (
-                    <div className="mt-3 text-sm text-[var(--color-primary)] font-bold" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div className="text-sm text-[var(--color-primary)] font-bold" style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}>
                       ✨ {basket.filter(q => q.chapter_id === chapter.id).length} টি প্রশ্ন নির্বাচিত
                     </div>
                   )}
