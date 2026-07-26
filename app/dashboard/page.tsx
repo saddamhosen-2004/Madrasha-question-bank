@@ -65,6 +65,7 @@ export default async function DashboardPage() {
         background: '#ffffff', 
         borderLeft: '4px solid var(--color-primary)',
         padding: institution.subscription_status === 'trial' ? '14px 20px' : '24px',
+        marginBottom: '28px',
         }}>
         {institution.subscription_status === 'trial' && (
           <div style={{ textAlign: 'center', width: '100%' }}>
