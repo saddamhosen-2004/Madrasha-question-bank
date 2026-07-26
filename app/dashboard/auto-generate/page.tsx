@@ -289,30 +289,37 @@ export default function AutoGeneratePage() {
       {/* Header Info Modal */}
       {showHeaderModal && (
         <div className="modal-overlay flex items-center justify-center p-4 z-50">
-          <div className="modal bg-[var(--color-surface)] w-full max-w-md rounded-xl shadow-2xl">
-            <div className="modal-header p-4 border-b border-[var(--color-border)] flex justify-between items-center">
-              <h2 className="text-xl font-bold">পরীক্ষার তথ্য</h2>
-              <button onClick={() => setShowHeaderModal(false)} className="text-[var(--color-text-muted)]">✕</button>
+          <div className="modal bg-[var(--color-surface)] w-full max-w-md rounded-xl shadow-2xl overflow-hidden" style={{ borderRadius: '16px' }}>
+            <div style={{
+              background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)',
+              padding: '20px 24px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <h2 style={{ color: 'white', fontSize: '1.25rem', fontWeight: 700, margin: 0 }}>পরীক্ষার তথ্য</h2>
+              <button onClick={() => setShowHeaderModal(false)} style={{ color: 'rgba(255,255,255,0.8)', background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button>
             </div>
-            <div className="modal-body p-4 space-y-4">
-              <div className="form-group">
-                <label className="label">পরীক্ষার নাম</label>
-                <input type="text" className="input" placeholder="উদা: বার্ষিক পরীক্ষা ২০২৪" value={headerInfo.examName} onChange={e => setHeaderInfo({...headerInfo, examName: e.target.value})} />
+            <div className="modal-body p-6 space-y-4">
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>পরীক্ষার নাম</label>
+                <input type="text" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: বার্ষিক পরীক্ষা ২০২৪" value={headerInfo.examName} onChange={e => setHeaderInfo({...headerInfo, examName: e.target.value})} />
               </div>
-              <div className="form-group">
-                <label className="label">তারিখ</label>
-                <input type="text" className="input" placeholder="উদা: ১৫ ডিসেম্বর ২০২৪" value={headerInfo.examDate} onChange={e => setHeaderInfo({...headerInfo, examDate: e.target.value})} />
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>তারিখ</label>
+                <input type="text" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: ১৫ ডিসেম্বর ২০২৪" value={headerInfo.examDate} onChange={e => setHeaderInfo({...headerInfo, examDate: e.target.value})} />
               </div>
-              <div className="form-group">
-                <label className="label">সময়</label>
-                <input type="text" className="input" placeholder="উদা: ৩ ঘণ্টা" value={headerInfo.examTime} onChange={e => setHeaderInfo({...headerInfo, examTime: e.target.value})} />
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>সময়</label>
+                <input type="text" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: ৩ ঘণ্টা" value={headerInfo.examTime} onChange={e => setHeaderInfo({...headerInfo, examTime: e.target.value})} />
               </div>
-              <div className="form-group">
-                <label className="label">মোট মার্কস (ঐচ্ছিক)</label>
-                <input type="number" className="input" placeholder="উদা: ১০০" value={headerInfo.totalMarks} onChange={e => setHeaderInfo({...headerInfo, totalMarks: parseInt(e.target.value) || 0})} />
+              <div className="form-group" style={{ marginBottom: '8px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোট মার্কস (ঐচ্ছিক)</label>
+                <input type="number" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: ১০০" value={headerInfo.totalMarks} onChange={e => setHeaderInfo({...headerInfo, totalMarks: parseInt(e.target.value) || 0})} />
               </div>
             </div>
-            <div className="modal-footer p-4 border-t border-[var(--color-border)] flex justify-end gap-2">
+            <div className="modal-footer p-4 border-t border-[var(--color-border)] flex justify-end gap-2 bg-[var(--color-surface)]" style={{ borderRadius: '0 0 16px 16px' }}>
               <button onClick={() => setShowHeaderModal(false)} className="btn btn-ghost">বাতিল</button>
               <button onClick={handleGeneratePDF} disabled={generating} className="btn btn-primary">
                 {generating ? <span className="spinner" /> : 'PDF তৈরি করুন'}
@@ -324,11 +331,11 @@ export default function AutoGeneratePage() {
 
       {/* Basket Bar */}
       {totalSelectedQuestions > 0 && (
-        <div className="fixed bottom-0 left-[260px] right-0 bg-[var(--color-surface)] border-t border-[var(--color-border)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 flex justify-between items-center z-20">
-          <div>
+        <div className="fixed bottom-0 left-0 md:left-[260px] right-0 bg-[var(--color-surface)] border-t border-[var(--color-border)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 flex flex-col sm:flex-row justify-between items-center gap-3 z-20">
+          <div className="text-center sm:text-left">
             <span className="font-bold text-[var(--color-text)]">মোট চাওয়া হয়েছে: <span className="text-[var(--color-primary)] text-xl">{totalSelectedQuestions}</span> টি প্রশ্ন</span>
           </div>
-          <button onClick={openHeaderModal} className="btn btn-secondary btn-lg">
+          <button onClick={openHeaderModal} className="btn btn-secondary w-full sm:w-auto btn-lg">
             Generate করুন
           </button>
         </div>

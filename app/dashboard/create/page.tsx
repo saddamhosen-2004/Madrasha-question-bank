@@ -293,30 +293,40 @@ export default function ManualCreatePage() {
       {/* Header Info Modal */}
       {showHeaderModal && (
         <div className="modal-overlay flex items-center justify-center p-4">
-          <div className="modal bg-[var(--color-surface)] w-full max-w-md rounded-xl shadow-2xl z-50">
-            <div className="modal-header p-4 border-b border-[var(--color-border)] flex justify-between items-center">
-              <h2 className="text-xl font-bold">পরীক্ষার তথ্য</h2>
-              <button onClick={() => setShowHeaderModal(false)} className="text-[var(--color-text-muted)]">✕</button>
+          <div className="modal bg-[var(--color-surface)] w-full max-w-md rounded-xl shadow-2xl z-50 overflow-hidden" style={{ borderRadius: '16px' }}>
+            {/* Modal Header with Green Gradient */}
+            <div style={{
+              background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)',
+              padding: '20px 24px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <h2 style={{ color: 'white', fontSize: '1.25rem', fontWeight: 700, margin: 0 }}>পরীক্ষার তথ্য</h2>
+              <button onClick={() => setShowHeaderModal(false)} style={{ color: 'rgba(255,255,255,0.8)', background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button>
             </div>
-            <div className="modal-body p-4 space-y-4">
-              <div className="form-group">
-                <label className="label">পরীক্ষার নাম</label>
-                <input type="text" className="input w-full p-2 border rounded" placeholder="উদা: অর্ধবার্ষিক পরীক্ষা ২০২৪" value={examInfo.exam_name} onChange={e => setExamInfo({...examInfo, exam_name: e.target.value})} />
+            
+            <div className="modal-body p-6 space-y-4">
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>পরীক্ষার নাম</label>
+                <input type="text" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: অর্ধবার্ষিক পরীক্ষা ২০২৪" value={examInfo.exam_name} onChange={e => setExamInfo({...examInfo, exam_name: e.target.value})} />
               </div>
-              <div className="form-group">
-                <label className="label">তারিখ</label>
-                <input type="text" className="input w-full p-2 border rounded" placeholder="উদা: ১২ জানুয়ারি ২০২৪" value={examInfo.exam_date} onChange={e => setExamInfo({...examInfo, exam_date: e.target.value})} />
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>তারিখ</label>
+                <input type="text" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: ১২ জানুয়ারি ২০২৪" value={examInfo.exam_date} onChange={e => setExamInfo({...examInfo, exam_date: e.target.value})} />
               </div>
-              <div className="form-group">
-                <label className="label">সময়</label>
-                <input type="text" className="input w-full p-2 border rounded" placeholder="উদা: ১ ঘণ্টা" value={examInfo.time_allowed} onChange={e => setExamInfo({...examInfo, time_allowed: e.target.value})} />
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>সময়</label>
+                <input type="text" className="input w-full" style={{ color: '#0e2015', fontWeight: 500 }} placeholder="উদা: ১ ঘণ্টা" value={examInfo.time_allowed} onChange={e => setExamInfo({...examInfo, time_allowed: e.target.value})} />
               </div>
-              <div className="form-group">
-                <label className="label">মোট মার্কস</label>
-                <input type="number" className="input w-full p-2 border rounded bg-gray-100 cursor-not-allowed" value={currentTotalMarks} disabled />
+              <div className="form-group" style={{ marginBottom: '8px' }}>
+                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোট মার্কস</label>
+                <input type="number" className="input w-full cursor-not-allowed" style={{ background: '#f1f5f9', color: '#1f2937', fontWeight: 600 }} value={currentTotalMarks} disabled />
               </div>
             </div>
-            <div className="modal-footer p-4 border-t border-[var(--color-border)] flex justify-end gap-2">
+            
+            <div className="modal-footer p-4 border-t border-[var(--color-border)] flex justify-end gap-2 bg-[var(--color-surface)]" style={{ borderRadius: '0 0 16px 16px' }}>
               <button onClick={() => setShowHeaderModal(false)} className="btn btn-ghost">বাতিল</button>
               <button onClick={handleGeneratePDF} disabled={generating} className="btn btn-primary">
                 {generating ? <span className="spinner" /> : 'PDF তৈরি করুন'}
