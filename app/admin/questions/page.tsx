@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
-import { Plus, Edit2, Trash2, XCircle } from 'lucide-react'
+import { Plus, Edit2, Trash2, XCircle, HelpCircle } from 'lucide-react'
 import { Question, Jamat, Kitab, Chapter, QuestionType, QuestionLanguage, DifficultyLevel } from '@/types'
 
 export default function QuestionsManagement() {
@@ -319,13 +319,26 @@ export default function QuestionsManagement() {
 
       {isModalOpen && (
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto py-8">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflowY: 'auto', maxHeight: '90vh' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
-              <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>{editQuestion ? 'প্রশ্ন এডিট করুন' : 'নতুন প্রশ্ন যুক্ত করুন'}</h3>
-              <button type="button" onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700" style={{ border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                <XCircle size={24} />
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflowY: 'auto', maxHeight: '90vh', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
+
+            {/* Purple Hero Header */}
+            <div style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%)', padding: '24px 28px', position: 'sticky', top: 0, zIndex: 10 }}>
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                style={{ position: 'absolute', top: '14px', right: '14px', border: 'none', background: 'rgba(255,255,255,0.2)', cursor: 'pointer', display: 'flex', alignItems: 'center', borderRadius: '50%', padding: '6px', color: 'white' }}
+              >
+                <XCircle size={20} />
               </button>
+              <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
+                <HelpCircle size={26} color="white" />
+              </div>
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.72rem', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>প্রশ্ন ব্যবস্থাপনা</p>
+              <h3 style={{ color: 'white', fontSize: '1.2rem', fontWeight: 700, margin: 0 }}>
+                {editQuestion ? 'প্রশ্ন এডিট করুন' : 'নতুন প্রশ্ন যুক্ত করুন'}
+              </h3>
             </div>
+
             <div className="modal-body" style={{ padding: '24px' }}>
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4" style={{ marginBottom: '20px' }}>

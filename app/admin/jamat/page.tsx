@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Jamat } from '@/types'
 import toast from 'react-hot-toast'
-import { Edit, Trash2 } from 'lucide-react'
+import { Edit, Trash2, Users, Hash, XCircle } from 'lucide-react'
 
 export default function JamatManagement() {
   const supabase = createClient()
@@ -134,42 +134,85 @@ export default function JamatManagement() {
       </div>
 
       {isModalOpen && (
-        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)' }}>
-              <h3 className="font-bold text-lg">{editJamat ? 'জামাত এডিট করুন' : 'নতুন জামাত যুক্ত করুন'}</h3>
-              <button onClick={closeModal} className="text-gray-500 hover:text-gray-700">&times;</button>
+        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50" style={{ padding: '16px' }}>
+          <div className="modal w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
+
+            {/* Green Hero Header */}
+            <div style={{ background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)', padding: '24px 28px', position: 'relative' }}>
+              <button
+                type="button"
+                onClick={closeModal}
+                style={{ position: 'absolute', top: '14px', right: '14px', border: 'none', background: 'rgba(255,255,255,0.2)', cursor: 'pointer', display: 'flex', alignItems: 'center', borderRadius: '50%', padding: '6px', color: 'white' }}
+              >
+                <XCircle size={20} />
+              </button>
+              <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '14px' }}>
+                <Users size={26} color="white" />
+              </div>
+              <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.72rem', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>জামাত ব্যবস্থাপনা</p>
+              <h3 style={{ color: 'white', fontSize: '1.2rem', fontWeight: 700, margin: 0 }}>
+                {editJamat ? 'জামাত এডিট করুন' : 'নতুন জামাত যুক্ত করুন'}
+              </h3>
             </div>
-            <div className="modal-body" style={{ padding: '24px' }}>
+
+            {/* Form Body */}
+            <div style={{ padding: '24px' }}>
               <form onSubmit={handleSubmit}>
-                <div className="form-group" style={{ marginBottom: '18px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>নাম</label>
+
+                {/* নাম field card */}
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '14px', border: '1px solid #d1fae5' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Users size={15} color="white" />
+                    </div>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>জামাতের নাম</label>
+                  </div>
                   <input
                     type="text"
                     className="input w-full"
+                    style={{ height: '42px', background: 'white', border: '1px solid #bbf7d0' }}
                     placeholder="জামাতের নাম লিখুন (উদা: ইবতিদায়ী প্রথম)"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
-                <div className="form-group" style={{ marginBottom: '24px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ক্রম (Sort Order)</label>
+
+                {/* Sort Order field card */}
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '24px', border: '1px solid #d1fae5' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Hash size={15} color="white" />
+                    </div>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>ক্রম (Sort Order)</label>
+                  </div>
                   <input
                     type="number"
                     className="input w-full"
+                    style={{ height: '42px', background: 'white', border: '1px solid #bbf7d0' }}
                     placeholder="ক্রমিক সংখ্যা লিখুন (উদা: ১)"
                     required
                     value={formData.sort_order}
                     onChange={e => setFormData({ ...formData, sort_order: e.target.value })}
                   />
                 </div>
-                <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
-                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px' }} onClick={closeModal}>বাতিল</button>
-                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px' }}>সংরক্ষণ করুন</button>
+
+                {/* Footer */}
+                <div style={{ display: 'flex', gap: '10px', paddingTop: '16px', borderTop: '1px solid #d1fae5' }}>
+                  <button
+                    type="button"
+                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: '1px solid #d1fae5', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', background: 'white', color: '#15803d', fontFamily: 'inherit' }}
+                    onClick={closeModal}
+                  >বাতিল</button>
+                  <button
+                    type="submit"
+                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', background: 'linear-gradient(135deg, #16a34a, #14532d)', color: 'white', fontFamily: 'inherit' }}
+                  >✓ সংরক্ষণ করুন</button>
                 </div>
+
               </form>
             </div>
+
           </div>
         </div>
       )}
