@@ -221,7 +221,7 @@ export default function ManualCreatePage() {
                   style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px', boxSizing: 'border-box' }}
                   onClick={() => openChapterModal(chapter)}
                 >
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-text)', margin: 0 }}>{chapter.name}</h3>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-text)', margin: 0, textAlign: 'center', width: '100%' }}>{chapter.name}</h3>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                     <span className="badge badge-info" style={{ fontSize: '0.82rem', padding: '4px 10px' }}>{chapter.question_count} টি প্রশ্ন</span>
                     <button className="btn btn-sm btn-ghost text-[var(--color-primary)]" style={{ fontSize: '0.82rem', padding: '6px 12px' }}>প্রশ্ন দেখুন</button>
