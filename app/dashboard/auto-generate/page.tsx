@@ -222,15 +222,15 @@ export default function AutoGeneratePage() {
         </div>
       </div>
 
-      <div className="card mb-8 flex flex-col md:flex-row gap-4" style={{ padding: '24px' }}>
-        <div className="form-group flex-1" style={{ marginBottom: 0 }}>
+      <div className="card mb-8 grid grid-cols-1 md:grid-cols-2 gap-6" style={{ padding: '24px' }}>
+        <div className="form-group" style={{ marginBottom: 0 }}>
           <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px' }}>জামাত নির্বাচন করুন</label>
           <select className="input" value={selectedJamat} onChange={e => setSelectedJamat(e.target.value)}>
             <option value="">-- নির্বাচন করুন --</option>
             {jamats.map(j => <option key={j.id} value={j.id}>{j.name}</option>)}
           </select>
         </div>
-        <div className="form-group flex-1" style={{ marginBottom: 0 }}>
+        <div className="form-group" style={{ marginBottom: 0 }}>
           <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px' }}>কিতাব নির্বাচন করুন</label>
           <select className="input" value={selectedKitab} onChange={e => setSelectedKitab(e.target.value)} disabled={!selectedJamat}>
             <option value="">-- নির্বাচন করুন --</option>
