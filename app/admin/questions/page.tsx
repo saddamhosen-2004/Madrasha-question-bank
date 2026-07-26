@@ -319,7 +319,7 @@ export default function QuestionsManagement() {
 
       {isModalOpen && (
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto py-8">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflow: 'hidden' }}>
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflowY: 'auto', maxHeight: '90vh' }}>
             <div className="modal-header p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
               <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>{editQuestion ? 'প্রশ্ন এডিট করুন' : 'নতুন প্রশ্ন যুক্ত করুন'}</h3>
               <button type="button" onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700" style={{ border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
