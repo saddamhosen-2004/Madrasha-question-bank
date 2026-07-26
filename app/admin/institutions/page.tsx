@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
-import { CheckCircle, XCircle, Eye, Calendar } from 'lucide-react'
+import { CheckCircle, XCircle, Eye, Calendar, Phone, MapPin, Package, CalendarDays } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 
 // types matching db
@@ -207,54 +207,71 @@ function InstitutionsContent() {
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50" style={{ padding: '16px' }}>
           <div className="modal w-full max-w-lg" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
             
-            {/* Hero Header */}
-            <div style={{ background: 'linear-gradient(135deg, var(--color-primary) 0%, #0d5c33 100%)', padding: '28px 28px 48px', position: 'relative' }}>
+            {/* Hero Header with avatar inside */}
+            <div style={{ background: 'linear-gradient(135deg, var(--color-primary) 0%, #0d5c33 100%)', padding: '24px 28px 32px', position: 'relative' }}>
               <button 
                 onClick={() => setViewInst(null)} 
-                style={{ position: 'absolute', top: '16px', right: '16px', border: 'none', background: 'rgba(255,255,255,0.2)', cursor: 'pointer', display: 'flex', alignItems: 'center', borderRadius: '50%', padding: '6px', color: 'white' }}
+                style={{ position: 'absolute', top: '14px', right: '14px', border: 'none', background: 'rgba(255,255,255,0.2)', cursor: 'pointer', display: 'flex', alignItems: 'center', borderRadius: '50%', padding: '6px', color: 'white' }}
               >
                 <XCircle size={20} />
               </button>
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.78rem', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>প্রতিষ্ঠান বিস্তারিত</p>
-              <h3 style={{ color: 'white', fontSize: '1.3rem', fontWeight: 700, margin: 0 }}>{viewInst.name}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem', margin: '6px 0 0' }}>{viewInst.email}</p>
-            </div>
-
-            {/* Avatar Overlap */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-36px', marginBottom: '4px' }}>
-              {viewInst.logo_url ? (
-                <img src={viewInst.logo_url} alt="logo" style={{ width: '72px', height: '72px', borderRadius: '50%', border: '4px solid white', objectFit: 'cover', boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }} />
-              ) : (
-                <div style={{ width: '72px', height: '72px', borderRadius: '50%', border: '4px solid white', background: 'linear-gradient(135deg, #1a6b3c, #0d5c33)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.8rem', color: 'white', boxShadow: '0 4px 16px rgba(0,0,0,0.15)' }}>
-                  {viewInst.name?.charAt(0)?.toUpperCase() || 'প'}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                {/* Avatar inside hero - no overlap needed */}
+                {viewInst.logo_url ? (
+                  <img src={viewInst.logo_url} alt="logo" style={{ width: '68px', height: '68px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.6)', objectFit: 'cover', flexShrink: 0 }} />
+                ) : (
+                  <div style={{ width: '68px', height: '68px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1.8rem', color: 'white', flexShrink: 0 }}>
+                    {viewInst.name?.charAt(0)?.toUpperCase() || 'প'}
+                  </div>
+                )}
+                <div>
+                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.72rem', margin: '0 0 3px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>প্রতিষ্ঠান বিস্তারিত</p>
+                  <h3 style={{ color: 'white', fontSize: '1.15rem', fontWeight: 700, margin: '0 0 4px', lineHeight: 1.3 }}>{viewInst.name}</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.82rem', margin: 0 }}>{viewInst.email}</p>
                 </div>
-              )}
+              </div>
             </div>
 
             {/* Info Body */}
-            <div style={{ padding: '8px 24px 24px' }}>
+            <div style={{ padding: '20px 24px 24px' }}>
               {/* Status Row */}
-              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px', flexWrap: 'wrap' }}>
                 {renderBadge(viewInst)}
                 {viewInst.is_approved && (
-                  <span style={{ marginLeft: '8px', fontSize: '0.78rem', color: '#16a34a', background: '#f0fdf4', padding: '3px 10px', borderRadius: '20px', border: '1px solid #bbf7d0', fontWeight: 600 }}>✓ অনুমোদিত</span>
+                  <span style={{ fontSize: '0.78rem', color: '#16a34a', background: '#f0fdf4', padding: '3px 10px', borderRadius: '20px', border: '1px solid #bbf7d0', fontWeight: 600 }}>✓ অনুমোদিত</span>
                 )}
               </div>
 
               {/* Info Cards Grid */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
-                {[
-                  { icon: '📞', label: 'ফোন নম্বর', value: viewInst.phone || 'প্রদান করা হয়নি' },
-                  { icon: '📍', label: 'ঠিকানা', value: viewInst.address || 'প্রদান করা হয়নি' },
-                  { icon: '📦', label: 'প্যাকেজ মেয়াদ', value: viewInst.subscription_expiry ? new Date(viewInst.subscription_expiry).toLocaleDateString('bn-BD') : 'নির্ধারিত নয়' },
-                  { icon: '📅', label: 'যোগদানের তারিখ', value: new Date(viewInst.created_at).toLocaleDateString('bn-BD') },
-                ].map((item, i) => (
-                  <div key={i} style={{ background: '#f8fafb', borderRadius: '12px', padding: '14px 16px', border: '1px solid #eef2f7' }}>
-                    <div style={{ fontSize: '1.1rem', marginBottom: '6px' }}>{item.icon}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '4px', fontWeight: 500 }}>{item.label}</div>
-                    <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.3 }}>{item.value}</div>
+                <div style={{ background: '#f0fdf4', borderRadius: '12px', padding: '14px 16px', border: '1px solid #d1fae5' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px' }}>
+                    <Phone size={16} color="white" />
                   </div>
-                ))}
+                  <div style={{ fontSize: '0.72rem', color: '#15803d', marginBottom: '3px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>ফোন নম্বর</div>
+                  <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#14532d' }}>{viewInst.phone || 'প্রদান করা হয়নি'}</div>
+                </div>
+                <div style={{ background: '#eff6ff', borderRadius: '12px', padding: '14px 16px', border: '1px solid #bfdbfe' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px' }}>
+                    <MapPin size={16} color="white" />
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: '#1d4ed8', marginBottom: '3px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>ঠিকানা</div>
+                  <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#1e3a8a' }}>{viewInst.address || 'প্রদান করা হয়নি'}</div>
+                </div>
+                <div style={{ background: '#fff7ed', borderRadius: '12px', padding: '14px 16px', border: '1px solid #fed7aa' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px' }}>
+                    <Package size={16} color="white" />
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: '#c2410c', marginBottom: '3px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>প্যাকেজ মেয়াদ</div>
+                  <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#7c2d12' }}>{viewInst.subscription_expiry ? new Date(viewInst.subscription_expiry).toLocaleDateString('bn-BD') : 'নির্ধারিত নয়'}</div>
+                </div>
+                <div style={{ background: '#faf5ff', borderRadius: '12px', padding: '14px 16px', border: '1px solid #e9d5ff' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: '#7c3aed', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px' }}>
+                    <CalendarDays size={16} color="white" />
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: '#6d28d9', marginBottom: '3px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>যোগদানের তারিখ</div>
+                  <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#4c1d95' }}>{new Date(viewInst.created_at).toLocaleDateString('bn-BD')}</div>
+                </div>
               </div>
 
               {/* Action Footer */}
