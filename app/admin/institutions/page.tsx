@@ -205,32 +205,65 @@ function InstitutionsContent() {
       {/* Details Modal */}
       {viewInst && (
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-lg" style={{ backgroundColor: 'var(--color-surface)' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)' }}>
-              <h3 className="font-bold text-lg">প্রতিষ্ঠান বিস্তারিত</h3>
-              <button onClick={() => setViewInst(null)} className="text-gray-500 hover:text-gray-700"><XCircle size={24} /></button>
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-lg" style={{ backgroundColor: 'var(--color-surface)', overflow: 'hidden' }}>
+            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
+              <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>প্রতিষ্ঠান বিস্তারিত</h3>
+              <button onClick={() => setViewInst(null)} className="text-gray-500 hover:text-gray-700" style={{ border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><XCircle size={24} /></button>
             </div>
-            <div className="modal-body p-4 space-y-4">
-              <div className="flex items-center space-x-4 mb-4">
-                {viewInst.logo_url && <img src={viewInst.logo_url} alt="logo" className="w-16 h-16 rounded-full object-cover border" />}
+            <div className="modal-body" style={{ padding: '24px' }}>
+              <div className="flex items-center space-x-4 mb-6" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+                {viewInst.logo_url ? (
+                  <img src={viewInst.logo_url} alt="logo" className="w-16 h-16 rounded-full object-cover border" style={{ width: '64px', height: '64px', borderRadius: '50%' }} />
+                ) : (
+                  <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--color-primary-50)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.5rem' }}>
+                    {viewInst.name?.charAt(0) || 'I'}
+                  </div>
+                )}
                 <div>
-                  <h4 className="font-bold text-xl">{viewInst.name}</h4>
-                  <p className="text-gray-500">{viewInst.email}</p>
+                  <h4 className="font-bold text-xl" style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-text)' }}>{viewInst.name}</h4>
+                  <p className="text-gray-500" style={{ margin: '4px 0 0', fontSize: '0.85rem' }}>{viewInst.email}</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div><strong>ফোন:</strong> {viewInst.phone || '-'}</div>
-                <div><strong>ঠিকানা:</strong> {viewInst.address || '-'}</div>
-                <div><strong>অনুমোদিত:</strong> {viewInst.is_approved ? 'হ্যাঁ' : 'না'}</div>
-                <div><strong>স্ট্যাটাস:</strong> {viewInst.subscription_status}</div>
-                <div><strong>প্যাকেজ মেয়াদ:</strong> {viewInst.subscription_expiry ? new Date(viewInst.subscription_expiry).toLocaleDateString('bn-BD') : '-'}</div>
-                <div><strong>যোগদানের তারিখ:</strong> {new Date(viewInst.created_at).toLocaleDateString('bn-BD')}</div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '24px' }}>
+                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>ফোন</span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.phone || '-'}</span>
+                </div>
+                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>ঠিকানা</span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.address || '-'}</span>
+                </div>
+                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>অনুমোদিত</span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.is_approved ? 'হ্যাঁ' : 'না'}</span>
+                </div>
+                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>স্ট্যাটাস</span>
+                  <span style={{ display: 'block' }}>{renderBadge(viewInst)}</span>
+                </div>
+                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>প্যাকেজ মেয়াদ</span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{viewInst.subscription_expiry ? new Date(viewInst.subscription_expiry).toLocaleDateString('bn-BD') : '-'}</span>
+                </div>
+                <div style={{ borderBottom: '1px solid #f1f5f1', paddingBottom: '8px' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', display: 'block', marginBottom: '4px' }}>যোগদানের তারিখ</span>
+                  <span style={{ fontWeight: 600, color: 'var(--color-text)' }}>{new Date(viewInst.created_at).toLocaleDateString('bn-BD')}</span>
+                </div>
               </div>
-              <div className="flex justify-end pt-4 border-t gap-2" style={{ borderColor: 'var(--color-border)' }}>
-                <button className={`btn ${viewInst.subscription_status === 'blocked' ? 'btn-success' : 'btn-danger'}`} onClick={() => { handleBlockUnblock(viewInst); setViewInst(null) }}>
+              <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                <button 
+                  className="btn" 
+                  style={{ 
+                    padding: '8px 18px', 
+                    fontSize: '0.88rem',
+                    background: viewInst.subscription_status === 'blocked' ? 'var(--color-success)' : 'var(--color-danger)', 
+                    color: 'white' 
+                  }} 
+                  onClick={() => { handleBlockUnblock(viewInst); setViewInst(null) }}
+                >
                   {viewInst.subscription_status === 'blocked' ? 'আনব্লক করুন' : 'ব্লক করুন'}
                 </button>
-                <button className="btn btn-secondary" onClick={() => setViewInst(null)}>বন্ধ করুন</button>
+                <button className="btn btn-ghost" style={{ padding: '8px 18px', fontSize: '0.88rem' }} onClick={() => setViewInst(null)}>বন্ধ করুন</button>
               </div>
             </div>
           </div>
@@ -240,26 +273,27 @@ function InstitutionsContent() {
       {/* Subscription Modal */}
       {subModalInst && (
         <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-sm" style={{ backgroundColor: 'var(--color-surface)' }}>
-            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)' }}>
-              <h3 className="font-bold text-lg">সাবস্ক্রিপশন সক্রিয়করণ</h3>
-              <button onClick={() => setSubModalInst(null)} className="text-gray-500 hover:text-gray-700"><XCircle size={24} /></button>
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-sm" style={{ backgroundColor: 'var(--color-surface)', overflow: 'hidden' }}>
+            <div className="modal-header p-4 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-border)', padding: '20px 24px' }}>
+              <h3 className="font-bold text-lg" style={{ fontSize: '1.2rem', color: 'var(--color-text)' }}>সাবস্ক্রিপশন সক্রিয়করণ</h3>
+              <button onClick={() => setSubModalInst(null)} className="text-gray-500 hover:text-gray-700" style={{ border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center' }}><XCircle size={24} /></button>
             </div>
-            <div className="modal-body p-4">
-              <form onSubmit={handleActivateSubscription} className="space-y-4">
-                <div className="form-group">
-                  <label className="label">মেয়াদোত্তীর্ণের তারিখ</label>
+            <div className="modal-body" style={{ padding: '24px' }}>
+              <form onSubmit={handleActivateSubscription}>
+                <div className="form-group" style={{ marginBottom: '24px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>মেয়াদোত্তীর্ণের তারিখ</label>
                   <input
                     type="date"
                     className="input w-full"
+                    style={{ height: '42px', display: 'block', marginTop: '8px' }}
                     required
                     value={subDate}
                     onChange={e => setSubDate(e.target.value)}
                   />
                 </div>
-                <div className="modal-footer flex justify-end gap-2 pt-4">
-                  <button type="button" className="btn btn-secondary" onClick={() => setSubModalInst(null)}>বাতিল</button>
-                  <button type="submit" className="btn btn-primary">সক্রিয় করুন</button>
+                <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px', fontSize: '0.88rem' }} onClick={() => setSubModalInst(null)}>বাতিল</button>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px', fontSize: '0.88rem' }}>সক্রিয় করুন</button>
                 </div>
               </form>
             </div>
