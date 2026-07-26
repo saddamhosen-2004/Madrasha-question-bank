@@ -167,8 +167,8 @@ export default function KitabManagement() {
       </div>
 
       {isModalOpen && (
-        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50" style={{ padding: '16px' }}>
-          <div className="modal w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
+        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-start justify-center z-50" style={{ padding: '24px 16px', overflowY: 'auto' }}>
+          <div className="modal w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', margin: 'auto' }}>
 
             {/* Blue Hero Header */}
             <div style={{ background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)', padding: '24px 28px', position: 'relative' }}>

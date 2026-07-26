@@ -318,8 +318,8 @@ export default function QuestionsManagement() {
       </div>
 
       {isModalOpen && (
-        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto py-8">
-          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflowY: 'auto', maxHeight: '90vh', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
+        <div className="modal-overlay fixed inset-0 bg-black/50 flex items-start justify-center z-50" style={{ overflowY: 'auto', padding: '24px 16px' }}>
+          <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', margin: 'auto' }}>
 
             {/* Purple Hero Header */}
             <div style={{ background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)', padding: '24px 28px', position: 'sticky', top: 0, zIndex: 10 }}>
