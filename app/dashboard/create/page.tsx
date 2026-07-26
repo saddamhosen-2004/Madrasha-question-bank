@@ -213,17 +213,17 @@ export default function ManualCreatePage() {
         selectedKitab && chapters.length > 0 && (
           <div>
             <h2 className="text-xl font-bold mb-4 text-[var(--color-text)]">অধ্যায়সমূহ</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
               {chapters.map(chapter => (
-                <div key={chapter.id} className="card p-4 cursor-pointer hover:border-[var(--color-primary)] transition-colors" onClick={() => openChapterModal(chapter)}>
-                  <h3 className="font-bold text-lg mb-2 text-[var(--color-text)]">{chapter.name}</h3>
-                  <div className="flex justify-between items-center mt-4">
+                <div key={chapter.id} className="card p-5 cursor-pointer hover:border-[var(--color-primary)] transition-colors w-full bg-[var(--color-surface)]" onClick={() => openChapterModal(chapter)}>
+                  <h3 className="font-bold text-lg mb-2 text-[var(--color-text)]" style={{ margin: '0 0 8px' }}>{chapter.name}</h3>
+                  <div className="flex justify-between items-center mt-4" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span className="badge badge-info">{chapter.question_count} টি প্রশ্ন</span>
-                    <button className="btn btn-sm btn-ghost text-[var(--color-primary)]">প্রশ্ন দেখুন</button>
+                    <button className="btn btn-sm btn-ghost text-[var(--color-primary)]" style={{ fontSize: '0.82rem', padding: '6px 12px' }}>প্রশ্ন দেখুন</button>
                   </div>
                   {basket.filter(q => q.chapter_id === chapter.id).length > 0 && (
-                    <div className="mt-2 text-sm text-[var(--color-primary)] font-semibold">
-                      {basket.filter(q => q.chapter_id === chapter.id).length} টি প্রশ্ন নির্বাচিত
+                    <div className="mt-3 text-sm text-[var(--color-primary)] font-bold" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      ✨ {basket.filter(q => q.chapter_id === chapter.id).length} টি প্রশ্ন নির্বাচিত
                     </div>
                   )}
                 </div>
