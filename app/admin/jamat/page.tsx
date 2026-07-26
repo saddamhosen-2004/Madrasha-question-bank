@@ -128,31 +128,33 @@ export default function JamatManagement() {
               <h3 className="font-bold text-lg">{editJamat ? 'জামাত এডিট করুন' : 'নতুন জামাত যুক্ত করুন'}</h3>
               <button onClick={closeModal} className="text-gray-500 hover:text-gray-700">&times;</button>
             </div>
-            <div className="modal-body p-4">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="form-group">
-                  <label className="label">নাম</label>
+            <div className="modal-body" style={{ padding: '24px' }}>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group" style={{ marginBottom: '18px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>নাম</label>
                   <input
                     type="text"
                     className="input w-full"
+                    placeholder="জামাতের নাম লিখুন (উদা: ইবতিদায়ী প্রথম)"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
-                <div className="form-group">
-                  <label className="label">ক্রম (Sort Order)</label>
+                <div className="form-group" style={{ marginBottom: '24px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ক্রম (Sort Order)</label>
                   <input
                     type="number"
                     className="input w-full"
+                    placeholder="ক্রমিক সংখ্যা লিখুন (উদা: ১)"
                     required
                     value={formData.sort_order}
                     onChange={e => setFormData({ ...formData, sort_order: e.target.value })}
                   />
                 </div>
-                <div className="modal-footer flex justify-end gap-2 pt-4">
-                  <button type="button" className="btn btn-ghost" onClick={closeModal}>বাতিল</button>
-                  <button type="submit" className="btn btn-primary">সংরক্ষণ করুন</button>
+                <div className="modal-footer" style={{ padding: '16px 0 0', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                  <button type="button" className="btn btn-ghost" style={{ padding: '8px 18px' }} onClick={closeModal}>বাতিল</button>
+                  <button type="submit" className="btn btn-primary" style={{ padding: '8px 24px' }}>সংরক্ষণ করুন</button>
                 </div>
               </form>
             </div>
