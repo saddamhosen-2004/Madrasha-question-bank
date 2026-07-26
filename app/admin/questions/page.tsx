@@ -322,7 +322,7 @@ export default function QuestionsManagement() {
           <div className="modal bg-white rounded-lg shadow-xl w-full max-w-3xl m-auto" style={{ backgroundColor: 'var(--color-surface)', overflowY: 'auto', maxHeight: '90vh', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
 
             {/* Purple Hero Header */}
-            <div style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%)', padding: '24px 28px', position: 'sticky', top: 0, zIndex: 10 }}>
+            <div style={{ background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)', padding: '24px 28px', position: 'sticky', top: 0, zIndex: 10 }}>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
@@ -466,3 +466,4 @@ export default function QuestionsManagement() {
     </div>
   )
 }
+

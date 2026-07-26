@@ -171,7 +171,7 @@ export default function KitabManagement() {
           <div className="modal w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
 
             {/* Blue Hero Header */}
-            <div style={{ background: 'linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%)', padding: '24px 28px', position: 'relative' }}>
+            <div style={{ background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)', padding: '24px 28px', position: 'relative' }}>
               <button
                 type="button"
                 onClick={closeModal}
@@ -193,16 +193,16 @@ export default function KitabManagement() {
               <form onSubmit={handleSubmit}>
 
                 {/* Jamat select card */}
-                <div style={{ background: '#eff6ff', borderRadius: '14px', padding: '16px 18px', marginBottom: '14px', border: '1px solid #bfdbfe' }}>
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '14px', border: '1px solid #d1fae5' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Users size={15} color="white" />
                     </div>
-                    <label style={{ fontWeight: 700, color: '#1e3a8a', fontSize: '0.88rem' }}>জামাত</label>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>জামাত</label>
                   </div>
                   <select
                     className="input w-full"
-                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #bfdbfe' }}
+                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #d1fae5' }}
                     required
                     value={formData.jamat_id}
                     onChange={e => setFormData({ ...formData, jamat_id: e.target.value })}
@@ -213,17 +213,17 @@ export default function KitabManagement() {
                 </div>
 
                 {/* Kitab name card */}
-                <div style={{ background: '#eff6ff', borderRadius: '14px', padding: '16px 18px', marginBottom: '24px', border: '1px solid #bfdbfe' }}>
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '24px', border: '1px solid #d1fae5' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#2563eb', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <BookOpen size={15} color="white" />
                     </div>
-                    <label style={{ fontWeight: 700, color: '#1e3a8a', fontSize: '0.88rem' }}>কিতাবের নাম</label>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>কিতাবের নাম</label>
                   </div>
                   <input
                     type="text"
                     className="input w-full"
-                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #bfdbfe' }}
+                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #d1fae5' }}
                     placeholder="কিতাবের নাম লিখুন (উদা: তাইসীরুল মুবতাদী)"
                     required
                     value={formData.name}
@@ -232,15 +232,15 @@ export default function KitabManagement() {
                 </div>
 
                 {/* Footer */}
-                <div style={{ display: 'flex', gap: '10px', paddingTop: '16px', borderTop: '1px solid #bfdbfe' }}>
+                <div style={{ display: 'flex', gap: '10px', paddingTop: '16px', borderTop: '1px solid #d1fae5' }}>
                   <button
                     type="button"
-                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: '1px solid #bfdbfe', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', background: 'white', color: '#1d4ed8', fontFamily: 'inherit' }}
+                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: '1px solid #d1fae5', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', background: 'white', color: '#15803d', fontFamily: 'inherit' }}
                     onClick={closeModal}
                   >বাতিল</button>
                   <button
                     type="submit"
-                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', background: 'linear-gradient(135deg, #2563eb, #1e3a8a)', color: 'white', fontFamily: 'inherit' }}
+                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', background: 'linear-gradient(135deg, #2563eb, #14532d)', color: 'white', fontFamily: 'inherit' }}
                   >✓ সংরক্ষণ করুন</button>
                 </div>
 
@@ -253,3 +253,4 @@ export default function KitabManagement() {
     </div>
   )
 }
+

@@ -199,7 +199,7 @@ export default function ChapterManagement() {
           <div className="modal w-full max-w-md" style={{ backgroundColor: 'var(--color-surface)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 25px 60px rgba(0,0,0,0.25)' }}>
 
             {/* Orange Hero Header */}
-            <div style={{ background: 'linear-gradient(135deg, #ea580c 0%, #7c2d12 100%)', padding: '24px 28px', position: 'relative' }}>
+            <div style={{ background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)', padding: '24px 28px', position: 'relative' }}>
               <button
                 type="button"
                 onClick={closeModal}
@@ -221,16 +221,16 @@ export default function ChapterManagement() {
               <form onSubmit={handleSubmit}>
 
                 {/* Kitab select card */}
-                <div style={{ background: '#fff7ed', borderRadius: '14px', padding: '16px 18px', marginBottom: '12px', border: '1px solid #fed7aa' }}>
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '12px', border: '1px solid #d1fae5' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <BookOpen size={15} color="white" />
                     </div>
-                    <label style={{ fontWeight: 700, color: '#7c2d12', fontSize: '0.88rem' }}>কিতাব</label>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>কিতাব</label>
                   </div>
                   <select
                     className="input w-full"
-                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #fed7aa' }}
+                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #d1fae5' }}
                     required
                     value={formData.kitab_id}
                     onChange={e => setFormData({ ...formData, kitab_id: e.target.value })}
@@ -241,17 +241,17 @@ export default function ChapterManagement() {
                 </div>
 
                 {/* Chapter name card */}
-                <div style={{ background: '#fff7ed', borderRadius: '14px', padding: '16px 18px', marginBottom: '12px', border: '1px solid #fed7aa' }}>
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '12px', border: '1px solid #d1fae5' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Layers size={15} color="white" />
                     </div>
-                    <label style={{ fontWeight: 700, color: '#7c2d12', fontSize: '0.88rem' }}>চ্যাপ্টারের নাম</label>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>চ্যাপ্টারের নাম</label>
                   </div>
                   <input
                     type="text"
                     className="input w-full"
-                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #fed7aa' }}
+                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #d1fae5' }}
                     placeholder="চ্যাপ্টারের নাম লিখুন (উদা: ঈমান ও আকীদা)"
                     required
                     value={formData.name}
@@ -260,17 +260,17 @@ export default function ChapterManagement() {
                 </div>
 
                 {/* Sort order card */}
-                <div style={{ background: '#fff7ed', borderRadius: '14px', padding: '16px 18px', marginBottom: '24px', border: '1px solid #fed7aa' }}>
+                <div style={{ background: '#f0fdf4', borderRadius: '14px', padding: '16px 18px', marginBottom: '24px', border: '1px solid #d1fae5' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#ea580c', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Hash size={15} color="white" />
                     </div>
-                    <label style={{ fontWeight: 700, color: '#7c2d12', fontSize: '0.88rem' }}>ক্রম (Sort Order)</label>
+                    <label style={{ fontWeight: 700, color: '#14532d', fontSize: '0.88rem' }}>ক্রম (Sort Order)</label>
                   </div>
                   <input
                     type="number"
                     className="input w-full"
-                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #fed7aa' }}
+                    style={{ height: '42px', display: 'block', background: 'white', border: '1px solid #d1fae5' }}
                     placeholder="ক্রমিক সংখ্যা লিখুন (উদা: ১)"
                     required
                     value={formData.sort_order}
@@ -279,15 +279,15 @@ export default function ChapterManagement() {
                 </div>
 
                 {/* Footer */}
-                <div style={{ display: 'flex', gap: '10px', paddingTop: '16px', borderTop: '1px solid #fed7aa' }}>
+                <div style={{ display: 'flex', gap: '10px', paddingTop: '16px', borderTop: '1px solid #d1fae5' }}>
                   <button
                     type="button"
-                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: '1px solid #fed7aa', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', background: 'white', color: '#c2410c', fontFamily: 'inherit' }}
+                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: '1px solid #d1fae5', fontWeight: 600, fontSize: '0.88rem', cursor: 'pointer', background: 'white', color: '#15803d', fontFamily: 'inherit' }}
                     onClick={closeModal}
                   >বাতিল</button>
                   <button
                     type="submit"
-                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', background: 'linear-gradient(135deg, #ea580c, #7c2d12)', color: 'white', fontFamily: 'inherit' }}
+                    style={{ flex: 1, padding: '11px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', background: 'linear-gradient(135deg, #ea580c, #14532d)', color: 'white', fontFamily: 'inherit' }}
                   >✓ সংরক্ষণ করুন</button>
                 </div>
 
@@ -300,3 +300,4 @@ export default function ChapterManagement() {
     </div>
   )
 }
+
