@@ -82,7 +82,7 @@ export default function JamatManagement() {
         position: 'relative',
         overflow: 'hidden',
         borderRadius: '0 0 24px 24px',
-        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)', marginBottom: '42px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',

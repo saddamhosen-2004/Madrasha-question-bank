@@ -180,9 +180,8 @@ export default function SiteSettingsPage() {
         position: 'relative',
         overflow: 'hidden',
         borderRadius: '0 0 24px 24px',
-        boxShadow: '0 8px 32px rgba(15,93,52,0.3)',
-        marginBottom: '28px'
-      }}>
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)', marginBottom: '42px',
+        }}>
         <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -199,7 +198,7 @@ export default function SiteSettingsPage() {
         <div className="card" style={{ padding: '28px', borderRadius: '16px' }}>
 
           {/* Logo Section */}
-          <div style={{ marginBottom: '28px' }}>
+          <div style={{ }}>
             <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)', marginBottom: '14px' }}>
               সাইট লোগো
             </label>
@@ -288,7 +287,7 @@ export default function SiteSettingsPage() {
           <div style={{ height: '1px', background: 'var(--color-border)', margin: '4px 0 24px' }} />
 
           {/* Favicon Section */}
-          <div style={{ marginBottom: '28px' }}>
+          <div style={{ }}>
             <label style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)', marginBottom: '14px' }}>
               ফেভিকন (Favicon / ব্রাউজার আইকন)
             </label>
@@ -376,7 +375,7 @@ export default function SiteSettingsPage() {
           <div style={{ height: '1px', background: 'var(--color-border)', margin: '4px 0 24px' }} />
 
           {/* Site Name */}
-          <div style={{ marginBottom: '28px' }}>
+          <div style={{ }}>
             <label htmlFor="site-name" style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)' }}>
               সাইটের নাম
             </label>

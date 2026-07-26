@@ -30,12 +30,11 @@ export default async function AdminDashboard() {
       <div style={{
         background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 50%, #16a34a 100%)',
         padding: '32px 32px 28px',
-        marginBottom: '28px',
+        
         position: 'relative',
         overflow: 'hidden',
         borderRadius: '0 0 24px 24px',
-        boxShadow: '0 8px 32px rgba(15,93,52,0.3)'
-      }}>
+        boxShadow: '0 8px 32px rgba(15,93,52,0.3)', marginBottom: '42px',}}>
         <div style={{ position: 'absolute', right: '-30px', top: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.05)' }} />
         <div style={{ position: 'absolute', right: '100px', bottom: '-60px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.04)' }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
