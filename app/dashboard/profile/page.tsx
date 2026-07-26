@@ -126,68 +126,75 @@ export default function ProfilePage() {
 
       <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 28px 28px', width: '100%' }}>
 
-      <div className="card" style={{ padding: '28px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', alignItems: 'center' }}>
-          
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+        {/* Top Green Gradient Section */}
+        <div style={{
+          background: 'linear-gradient(135deg, #052e16 0%, #0f5d34 100%)',
+          padding: '36px 24px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '16px',
+          borderBottom: '1px solid rgba(15, 93, 52, 0.15)'
+        }}>
           {/* Logo Section */}
-          <div className="w-full flex flex-col items-center" style={{ flexShrink: 0 }}>
-            <div className="relative w-40 h-40 rounded-full border-4 border-[var(--color-primary-50)] overflow-hidden bg-[var(--color-surface)] flex items-center justify-center mb-4 shadow-lg group">
-              {institution?.logo_url ? (
-                <Image src={institution.logo_url} alt="Logo" fill className="object-cover" unoptimized />
+          <div className="relative w-32 h-32 rounded-full border-4 border-white/20 overflow-hidden bg-white/10 flex items-center justify-center shadow-lg group" style={{ position: 'relative' }}>
+            {institution?.logo_url ? (
+              <Image src={institution.logo_url} alt="Logo" fill className="object-cover" unoptimized />
+            ) : (
+              <span className="text-4xl text-white font-bold">{institution?.name?.charAt(0) || 'I'}</span>
+            )}
+            
+            <label className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity" style={{ position: 'absolute' }}>
+              {uploading ? (
+                <span className="spinner spinner-light" />
               ) : (
-                <span className="text-4xl text-[var(--color-primary)] font-bold">{institution?.name?.charAt(0) || 'I'}</span>
+                <>
+                  <svg className="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                  <span className="text-xs font-semibold">লোগো পরিবর্তন</span>
+                </>
               )}
-              
-              <label className="absolute inset-0 bg-black/50 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
-                {uploading ? (
-                  <span className="spinner spinner-light" />
-                ) : (
-                  <>
-                    <svg className="w-8 h-8 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span className="text-sm font-semibold">লোগো পরিবর্তন</span>
-                  </>
-                )}
-                <input type="file" className="hidden" accept="image/*" onChange={handleLogoUpload} disabled={uploading} />
-              </label>
-            </div>
-            <div className="text-center">
-              <h3 className="font-bold text-lg text-[var(--color-text)]" style={{ margin: '0 0 4px' }}>{institution?.name}</h3>
-              <p className="text-sm text-[var(--color-text-muted)]" style={{ margin: 0 }}>{institution?.email}</p>
-            </div>
+              <input type="file" className="hidden" accept="image/*" onChange={handleLogoUpload} disabled={uploading} />
+            </label>
           </div>
-
-          {/* Form Section */}
-          <div className="w-full">
-            <form onSubmit={handleSave} className="space-y-4">
-              <div className="form-group" style={{ marginBottom: '18px' }}>
-                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
-                <input type="text" className="input" placeholder="প্রতিষ্ঠানের নাম লিখুন" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
-              </div>
-              <div className="form-group" style={{ marginBottom: '18px' }}>
-                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ইমেইল</label>
-                <input type="email" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={institution?.email || ''} disabled />
-                <p className="text-xs text-[var(--color-text-muted)] mt-1" style={{ margin: '4px 0 0' }}>লগইন ইমেইল পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
-              </div>
-              <div className="form-group" style={{ marginBottom: '18px' }}>
-                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোবাইল নম্বর</label>
-                <input type="text" className="input" placeholder="উদা: 017XXXXXXX" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} required />
-              </div>
-              <div className="form-group" style={{ marginBottom: '22px' }}>
-                <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ঠিকানা</label>
-                <textarea className="input min-h-[100px]" placeholder="প্রতিষ্ঠানের সম্পূর্ণ ঠিকানা লিখুন" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} required />
-              </div>
-              
-              <div className="pt-4 border-t border-[var(--color-border)] flex justify-end" style={{ paddingTop: '16px', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end' }}>
-                <button type="submit" disabled={saving} className="btn btn-primary px-8" style={{ padding: '10px 28px', fontSize: '0.92rem' }} id="profile-save-btn">
-                  {saving ? <span className="spinner" /> : 'সেভ করুন'}
-                </button>
-              </div>
-            </form>
+          
+          <div className="text-center">
+            <h3 className="font-bold text-xl text-white" style={{ margin: '0 0 4px' }}>{institution?.name}</h3>
+            <p className="text-sm text-white/70" style={{ margin: 0 }}>{institution?.email}</p>
           </div>
+        </div>
 
+        {/* Bottom Form Section */}
+        <div style={{ padding: '28px' }}>
+          <form onSubmit={handleSave} className="space-y-4">
+            <div className="form-group" style={{ marginBottom: '18px' }}>
+              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>প্রতিষ্ঠানের নাম</label>
+              <input type="text" className="input" placeholder="প্রতিষ্ঠানের নাম লিখুন" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required />
+            </div>
+            <div className="form-group" style={{ marginBottom: '18px' }}>
+              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ইমেইল</label>
+              <input type="email" className="input" style={{ background: '#f1f5f9', cursor: 'not-allowed', color: '#64748b' }} value={institution?.email || ''} disabled />
+              <p className="text-xs text-[var(--color-text-muted)] mt-1" style={{ margin: '4px 0 0' }}>লগইন ইমেইল পরিবর্তন করতে চাইলে অ্যাডমিনের সাথে যোগাযোগ করুন</p>
+            </div>
+            <div className="form-group" style={{ marginBottom: '18px' }}>
+              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>মোবাইল নম্বর</label>
+              <input type="text" className="input" placeholder="উদা: 017XXXXXXX" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} required />
+            </div>
+            <div className="form-group" style={{ marginBottom: '22px' }}>
+              <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '8px', display: 'block' }}>ঠিকানা</label>
+              <textarea className="input min-h-[100px]" placeholder="প্রতিষ্ঠানের সম্পূর্ণ ঠিকানা লিখুন" value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} required />
+            </div>
+            
+            <div className="pt-4 border-t border-[var(--color-border)] flex justify-end" style={{ paddingTop: '16px', borderTop: '1px solid var(--color-border)', display: 'flex', justifyContent: 'flex-end' }}>
+              <button type="submit" disabled={saving} className="btn btn-primary px-8" style={{ padding: '10px 28px', fontSize: '0.92rem' }} id="profile-save-btn">
+                {saving ? <span className="spinner" /> : 'সেভ করুন'}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
+
+      </div>
     </div>
-  </div>
-)
+  )
 }
