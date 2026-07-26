@@ -203,11 +203,11 @@ export default function ChapterManagement() {
             </div>
             <div className="modal-body" style={{ padding: '24px 24px 24px' }}>
               <form onSubmit={handleSubmit}>
-                <div className="form-group" style={{ marginBottom: '18px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '10px', display: 'block', fontSize: '0.9rem' }}>কিতাব</label>
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>কিতাব</label>
                   <select 
                     className="input w-full"
-                    style={{ height: '42px', display: 'block' }}
+                    style={{ height: '42px', display: 'block', marginTop: '8px' }}
                     required
                     value={formData.kitab_id}
                     onChange={e => setFormData({ ...formData, kitab_id: e.target.value })}
@@ -216,24 +216,24 @@ export default function ChapterManagement() {
                     {kitabs.map(k => <option key={k.id} value={k.id}>{k.name}</option>)}
                   </select>
                 </div>
-                <div className="form-group" style={{ marginBottom: '18px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '10px', display: 'block', fontSize: '0.9rem' }}>চ্যাপ্টারের নাম</label>
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>চ্যাপ্টারের নাম</label>
                   <input
                     type="text"
                     className="input w-full"
-                    style={{ height: '42px', display: 'block' }}
+                    style={{ height: '42px', display: 'block', marginTop: '8px' }}
                     placeholder="চ্যাপ্টারের নাম লিখুন (উদা: ঈমান ও আকীদা)"
                     required
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
-                <div className="form-group" style={{ marginBottom: '26px' }}>
-                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '10px', display: 'block', fontSize: '0.9rem' }}>ক্রম (Sort Order)</label>
+                <div className="form-group" style={{ marginBottom: '28px' }}>
+                  <label className="label" style={{ fontWeight: 600, color: 'var(--color-text)', display: 'block', fontSize: '0.9rem' }}>ক্রম (Sort Order)</label>
                   <input
                     type="number"
                     className="input w-full"
-                    style={{ height: '42px', display: 'block' }}
+                    style={{ height: '42px', display: 'block', marginTop: '8px' }}
                     placeholder="ক্রমিক সংখ্যা লিখুন (উদা: ১)"
                     required
                     value={formData.sort_order}
