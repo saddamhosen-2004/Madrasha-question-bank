@@ -5,8 +5,10 @@ import { createClient } from '@/lib/supabase/client'
 import toast from 'react-hot-toast'
 import { Settings, Upload, X, Save, RefreshCw } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function SiteSettingsPage() {
+  const router = useRouter()
   const [siteName, setSiteName] = useState('')
   
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
@@ -170,7 +172,7 @@ export default function SiteSettingsPage() {
   }
 
   return (
-    <div style={{ maxWidth: '640px' }}>
+    <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 12px' }}>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
@@ -373,20 +375,20 @@ export default function SiteSettingsPage() {
 
           {/* Site Name */}
           <div style={{ marginBottom: '28px' }}>
-            <label htmlFor="site-name" style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)', marginBottom: '10px' }}>
+            <label htmlFor="site-name" style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem', color: 'var(--color-text)' }}>
               সাইটের নাম
             </label>
             <input
               id="site-name"
               type="text"
-              className="input"
+              className="input w-full"
               value={siteName}
               onChange={e => setSiteName(e.target.value)}
               placeholder="যেমন: মাদ্রাসা প্রশ্নব্যাংক"
               required
-              style={{ fontSize: '1rem' }}
+              style={{ height: '42px', marginTop: '8px', display: 'block', width: '100%', fontSize: '1rem' }}
             />
-            <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '6px' }}>
+            <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginTop: '8px' }}>
               এই নামটি লগইন পেজ ও ব্রাউজার ট্যাবের শীর্ষে প্রদর্শিত হবে।
             </p>
           </div>
