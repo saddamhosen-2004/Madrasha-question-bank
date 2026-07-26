@@ -335,7 +335,7 @@ export default function AutoGeneratePage() {
           <div className="text-center sm:text-left">
             <span className="font-bold text-[var(--color-text)]">মোট চাওয়া হয়েছে: <span className="text-[var(--color-primary)] text-xl">{totalSelectedQuestions}</span> টি প্রশ্ন</span>
           </div>
-          <button onClick={openHeaderModal} className="btn btn-secondary w-full sm:w-auto btn-lg">
+          <button onClick={openHeaderModal} className="btn btn-secondary w-full sm:w-auto btn-lg justify-center">
             Generate করুন
           </button>
         </div>

@@ -367,7 +367,7 @@ export default function ManualCreatePage() {
             <span className="font-bold text-[var(--color-text)] mr-4 block sm:inline-block">মোট নির্বাচিত: <span className="text-[var(--color-primary)] text-xl">{basket.length}</span> টি প্রশ্ন</span>
             <span className="font-bold text-[var(--color-text)]">মোট মার্কস: <span className="text-[var(--color-accent)] text-xl">{currentTotalMarks}</span></span>
           </div>
-          <button onClick={() => setShowHeaderModal(true)} className="btn btn-primary w-full sm:w-auto btn-lg">
+          <button onClick={() => setShowHeaderModal(true)} className="btn btn-primary w-full sm:w-auto btn-lg justify-center">
             প্রশ্নপত্র তৈরি করুন
           </button>
         </div>
