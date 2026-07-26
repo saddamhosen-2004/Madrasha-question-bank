@@ -242,35 +242,58 @@ export default function ManualCreatePage() {
       {/* Chapter Modal */}
       {selectedChapter && (
         <div className="modal-overlay flex items-center justify-center p-4">
-          <div className="modal bg-[var(--color-surface)] w-full max-w-4xl max-h-[90vh] flex flex-col rounded-xl shadow-2xl">
-            <div className="modal-header p-4 border-b border-[var(--color-border)] flex justify-between items-center">
-              <h2 className="text-xl font-bold text-[var(--color-text)]">{selectedChapter.name} - প্রশ্নসমূহ</h2>
-              <button onClick={() => setSelectedChapter(null)} className="text-[var(--color-text-muted)] hover:text-[var(--color-text)]">✕</button>
+          <div className="modal bg-[var(--color-surface)] w-full max-w-4xl max-h-[90vh] flex flex-col rounded-xl shadow-2xl overflow-hidden" style={{ borderRadius: '16px' }}>
+            {/* Modal Header with Green Gradient */}
+            <div style={{
+              background: 'linear-gradient(135deg, #16a34a 0%, #14532d 100%)',
+              padding: '20px 24px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(255,255,255,0.1)'
+            }}>
+              <h2 style={{ color: 'white', fontSize: '1.25rem', fontWeight: 700, margin: 0 }}>{selectedChapter.name} - প্রশ্নসমূহ</h2>
+              <button onClick={() => setSelectedChapter(null)} style={{ color: 'rgba(255,255,255,0.8)', background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer' }}>✕</button>
             </div>
-            <div className="modal-body p-4 overflow-y-auto flex-1">
+            
+            <div className="modal-body p-6 overflow-y-auto flex-1 bg-[#f8fafc]">
               {questionsLoading ? (
                 <div className="flex justify-center p-8"><div className="spinner spinner-dark" /></div>
               ) : chapterQuestions.length > 0 ? (
                 <div className="space-y-3">
                   {chapterQuestions.map(q => {
                     const isRtl = ['arabic', 'farsi', 'urdu'].includes(q.language)
+                    const isChecked = tempSelection.includes(q.id)
                     return (
-                      <label key={q.id} className="checkbox-label flex items-start gap-3 p-3 border border-[var(--color-border)] rounded-lg hover:bg-[var(--color-primary-50)] cursor-pointer">
+                      <label 
+                        key={q.id} 
+                        className="checkbox-label flex items-start gap-4 p-4 border rounded-xl cursor-pointer transition-all"
+                        style={{
+                          borderColor: isChecked ? '#16a34a' : 'var(--color-border)',
+                          background: isChecked ? 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)' : 'white',
+                          boxShadow: isChecked ? '0 4px 12px rgba(22, 163, 74, 0.08)' : 'none'
+                        }}
+                      >
                         <input 
                           type="checkbox" 
                           className="mt-1"
-                          checked={tempSelection.includes(q.id)}
+                          style={{ accentColor: '#16a34a', transform: 'scale(1.15)', cursor: 'pointer' }}
+                          checked={isChecked}
                           onChange={(e) => {
                             if (e.target.checked) setTempSelection([...tempSelection, q.id])
                             else setTempSelection(tempSelection.filter(id => id !== q.id))
                           }}
                         />
                         <div className="flex-1">
-                          <div dir={isRtl ? 'rtl' : 'ltr'} className={`text-[var(--color-text)] ${isRtl ? 'text-xl font-arabic' : ''}`}>
+                          <div 
+                            dir={isRtl ? 'rtl' : 'ltr'} 
+                            className={`text-[var(--color-text)] font-semibold ${isRtl ? 'text-xl font-arabic' : 'text-base'}`}
+                            style={{ textAlign: isRtl ? 'right' : 'left' }}
+                          >
                             {q.question_text}
                           </div>
-                          <div className="flex gap-2 mt-2">
-                            <span className="badge badge-muted text-xs">{q.type}</span>
+                          <div className="flex gap-2 mt-3" style={{ display: 'flex', gap: '8px' }}>
+                            <span className="badge badge-muted text-xs">{q.type === 'mcq' ? 'MCQ / বহুনির্বাচনী' : 'Written / লিখিত'}</span>
                             <span className="badge badge-warning text-xs">মান: {q.marks}</span>
                           </div>
                         </div>
@@ -282,7 +305,8 @@ export default function ManualCreatePage() {
                 <div className="empty-state">কোনো প্রশ্ন নেই</div>
               )}
             </div>
-            <div className="modal-footer p-4 border-t border-[var(--color-border)] flex justify-end gap-2 bg-[var(--color-surface)]">
+            
+            <div className="modal-footer p-4 border-t border-[var(--color-border)] flex justify-end gap-2 bg-[var(--color-surface)]" style={{ borderRadius: '0 0 16px 16px' }}>
               <button onClick={() => setSelectedChapter(null)} className="btn btn-ghost">বাতিল</button>
               <button onClick={handleConfirmSelection} className="btn btn-primary">নির্বাচন নিশ্চিত করুন ({tempSelection.length})</button>
             </div>
